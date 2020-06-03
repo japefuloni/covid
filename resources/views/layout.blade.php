@@ -50,6 +50,11 @@ use App\Entidades\Menus;
 
 
 </head>
+<style>
+  .card-primary:not(.card-outline) > .card-header {
+    background-color: #6a0d0d !important;
+  }
+</style>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
 <div class="wrapper">
