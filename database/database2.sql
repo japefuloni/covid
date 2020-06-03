@@ -18,7 +18,7 @@ USE `covidform`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `administradores` ok
+-- Table structure for table `administradores`
 --
 
 DROP TABLE IF EXISTS `administradores`;
@@ -26,10 +26,11 @@ DROP TABLE IF EXISTS `administradores`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `administradores` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `t_nombrecompleto` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `t_login` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `t_nombrecompleto` varchar(155) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `t_login` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `n_idsede` bigint(20) NOT NULL,
   `t_email` varchar(50) NOT NULL,
-  `password` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
@@ -226,4 +227,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-03 15:35:50
+-- Dump completed on 2020-06-03 15:49:07
