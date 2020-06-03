@@ -29,4 +29,4 @@ class Formulario extends Model
     //
     protected $table = 'formulario'; //Esta line se pone si la tabla se llama de manera diferente
 }
-//ok
+//ok Javier
