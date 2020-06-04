@@ -10,7 +10,9 @@ use Illuminate\Support\Facades\Input;
 
 
 use App\Entidades\Formulario;
+use App\Entidades\Sedes;
 use App\User;
+use Session;
 
 
 class RevisarController extends Controller
@@ -25,12 +27,18 @@ class RevisarController extends Controller
      */
     public function verificar()
     {
-        $key = Input::get('t_documento');
+        
+      $sedes= Sedes::all();
+     
+      
+      $key = Input::post('t_documento');
         $docentesall= Formulario::all();
         $usuarioesta=User::where('t_documento','=',$key)->first();
         $usuariohoy="";
         $nombrecompleto="";
         $idusuario="";
+        $viculoconu="";
+        //$usuarioesta=null;
         
         $errorenform="";
 
@@ -42,6 +50,8 @@ class RevisarController extends Controller
 
         if (!is_null($usuarioesta)){
           $nombrecompleto=$usuarioesta->t_nombres." ".$usuarioesta->t_apellidos;
+          $viculoconu=$usuarioesta->vinculou->t_vinculo;
+
           $idusuario=$usuarioesta->n_idusuario;
           $formhoy=Formulario::where([
               ['n_idusuario', '=', $idusuario],
@@ -50,17 +60,13 @@ class RevisarController extends Controller
 
           
 
-          if (!is_null($formhoy)){
-            $contestohoy="SI";
+          if (!is_null($formhoy)) $contestohoy="SI";
 
-            $t_presentadofiebre=$formhoy->t_presentadofiebre;
+          Session::put('idUsuario',$idusuario);
 
+          return redirect()->route('formulario.create');
 
-            ///hola mundo 22222
-           
-            
-
-          };
+                 
 
 
         //dd($usuarioesta);
@@ -82,7 +88,11 @@ class RevisarController extends Controller
         'idusuario'=>$idusuario,
         'docentesall' => $docentesall,
         'errorenform'=>$errorenform,
-        'contestohoy'=>$contestohoy
-      ])->with('status','El Docente Nuevo fue creado con éxito');;
+        'contestohoy'=>$contestohoy,
+        'viculoconu'=>$viculoconu,
+        'usuarioesta'=>$usuarioesta,
+        'sedes'=>$sedes,
+        't_documento'=>$key
+      ])->with('status','El Docente Nuevo fue creado con éxito');
     }
 }

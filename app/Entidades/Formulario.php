@@ -12,7 +12,11 @@ class Formulario extends Model
 
     protected $fillable= ['t_nombres', 
                             'n_idusuario',
+                            'n_idsede',
                             't_consentimiento',
+                            't_irahoy',
+                            't_sitios',
+                            't_actividades',
                             't_presentadofiebre',
                             't_diasfiebre',
                             't_dolorgarganta',
@@ -21,14 +25,17 @@ class Formulario extends Model
                             't_dificultadrespirar', 
                             't_tosseca',
                             't_contactopersonasinfectadas',
-                            'd_ultimocontacto'
+                            'd_ultimocontacto',
+                            't_realizoviaje'
                             
                         ];
+
+
+
+                          
 
     protected $guarded= ['n_idformulario', 'created_at', 'updated_at'];
     //
     protected $table = 'formulario'; //Esta line se pone si la tabla se llama de manera diferente
 }
-//ok Javier
-//ok
-//ok
+

@@ -5,9 +5,6 @@
 @section('laaccion','Verificación')
 
 
-@section('nombusuario', $nombrecompleto )
-
-
 
 @section('content')
 
@@ -25,14 +22,17 @@ if ($errorenform=="Usuario No Existe")
 else 
   {
   ?>   
-  <h4>Bienvenido a la encuesta para...  <strong>{{$nombrecompleto}}</strong> </h4><br>
+  <h4>Bienvenido   <strong>{{$nombrecompleto}} <p class="text-danger">{{$usuarioesta->c_codtipo}}: {{$usuarioesta->t_documento}}</p></strong> </h4><br>
+
+  <h3>Encuesta para identificar posibles casos de COVID-19 en UPB</h3>
   <?php
   if ($contestohoy=="SI") echo '<h4>El d&iacute;a de Hoy ya contest&oacute; el formulario. Muchas gracias</h4><br>';
     else
     {
     ?>
-    <h4>Por favor llene todos los campos del formulario</h4><br>
-    <h4><p class="text-danger">Formulario</p></h4> 
+    
+
+
     <?php 
     }
     ?>

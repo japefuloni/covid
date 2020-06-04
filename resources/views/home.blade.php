@@ -22,7 +22,7 @@ else {
  @guest
 
  <form action="{{ route('revisar')}}" method="POST">
-    @include('formulario._form',['btnText'=>'Guardar'])
+    @include('revisar._form',['btnText'=>'Guardar'])
 </form>
 
 <br><br>
