@@ -27,10 +27,11 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Usuario') }}</label>
+                            <label for="login" class="col-md-4 col-form-label text-md-right">{{ __('Usuario') }}</label>
                             <div class="col-md-6">
-                                <input id="t_email" type="email" class="form-control @error('email') is-invalid @enderror" name="t_email" value="{{ old('t_email') }}" required autocomplete="t_email" autofocus>
-                                @error('email')
+                                <input id="usuario" class="form-control @error('usuario') is-invalid @enderror" name="usuario" value="{{ old('usuario') }}" required 
+                                autocomplete="usuario" autofocus>
+                                @error('usuario')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

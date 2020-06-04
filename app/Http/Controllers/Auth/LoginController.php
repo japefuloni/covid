@@ -4,36 +4,58 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Entidades\AuditoriaIngreso;
+use Auth;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
-    use AuthenticatesUsers;
-
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+   
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        date_default_timezone_set('America/Bogota');
+        $this->middleware('guest',['only'=>'showLoginForm']); 
     }
+
+    public function showLoginForm()
+    {
+            return view('auth.login');
+    }
+
+    public function irLogin()
+    {
+        return redirect()->route('login');
+    }
+
+    public function validarLogin()    {
+
+        $this->validate(request(),['usuario' => 'required|string','password'=>'required|string']);
+
+        $credentials = [$this->username() => request('usuario'),'password' => request('password'),];
+
+        if (Auth::attempt($credentials)) {
+           if(auth()->user()->b_habilitado=='1'){               
+               $this->auditoriaIngreso(request());               
+               return redirect()->route('estadisticas');
+           } else{
+               $this->logout();
+           }
+       }
+        return back()->withErrors(['email'=>trans('auth.failed')])->withInput(request(['email']));
+    }
+
+    public function auditoriaIngreso($request)
+     {
+        $auditoria=new AuditoriaIngreso();
+        $auditoria->n_idadministrador=Auth::id();
+        $auditoria->t_ip=$_SERVER['REMOTE_ADDR'];
+        $auditoria->t_navegador=$_SERVER['HTTP_USER_AGENT'];         
+        $auditoria->save();
+     }
+
+     public function username()
+     {
+         return 't_login';
+     }
+
+
 }
