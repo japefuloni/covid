@@ -2,7 +2,7 @@
 <ul>
     @foreach ($errors->all() as $item)
     <li>
-{{$item}}
+<strong class="text-danger">{{$item}}</strong>
         </li>
         
     @endforeach

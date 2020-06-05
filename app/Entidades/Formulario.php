@@ -26,7 +26,10 @@ class Formulario extends Model
                             't_tosseca',
                             't_contactopersonasinfectadas',
                             'd_ultimocontacto',
-                            't_realizoviaje'
+                            't_realizoviaje',
+                            'n_semaforo',
+                            't_activo',
+                            'n_iddesactiva'
                             
                         ];
 
@@ -37,5 +40,11 @@ class Formulario extends Model
     protected $guarded= ['n_idformulario', 'created_at', 'updated_at'];
     //
     protected $table = 'formulario'; //Esta line se pone si la tabla se llama de manera diferente
+
+
+    public function usuario()
+	{
+		 return $this->belongsTo('App\User','n_idusuario');
+    }
 }
 

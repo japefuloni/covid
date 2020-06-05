@@ -10,6 +10,8 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    protected $primaryKey = 'n_idusuario';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -41,5 +43,13 @@ class User extends Authenticatable
     public function vinculou()
 	{
 		 return $this->belongsTo('App\Entidades\Vinculou','n_idvinculou');
+    }
+
+     /**
+     * Get the comments for the blog post.
+     */
+    public function formulario()
+    {
+        return $this->hasMany('App\Entidades\Formulario','n_idusuario');
     }
 }

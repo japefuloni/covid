@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Session;
 //Importanto las validaciones
 use App\Http\Requests\SaveFormularioRequest;
+use DB;
 
 class FormularioController extends Controller
 {
@@ -99,22 +100,54 @@ class FormularioController extends Controller
 
 
 
-    public function store3()
-    {
-      request()->validate([
-            'n_idsede'=>"required"
-           
-      ]);
-      return "Datos Validados";
-
-    }
-
+    
 
 
     public function store(SaveFormularioRequest $request)
     {
-      Sedes::create($request->validated()); //solo envia los que esten validados por CreateProjectRequest
-      return redirect()->route('home')->with('status','La sede fue creado con éxito');
+        $semaforonegacion="NO";
+        $semafororojo="NO";
+        $semaforo=1;
+        //dd($request->validated());
+        $campos= ($request->validated());
+        $miscampos=array($campos);
+        
+         if  ($miscampos[0]['t_consentimiento']=="NO")$semaforonegacion="SI"; 
+         if  ($miscampos[0]['t_presentadofiebre']=="SI")$semaforonegacion="SI"; 
+         if  ($miscampos[0]['t_dolorgarganta']=="SI")$semaforonegacion="SI"; 
+         if  ($miscampos[0]['t_malestargeneral']=="SI")$semaforonegacion="SI"; 
+         if  ($miscampos[0]['t_secresioncongestionnasal']=="SI")$semaforonegacion="SI"; 
+         if  ($miscampos[0]['t_dificultadrespirar']=="SI"){
+                $semaforonegacion="SI";
+                $semafororojo="SI"; 
+            }
+         if  ($miscampos[0]['t_tosseca']=="SI")$semaforonegacion="SI"; 
+         if  ($miscampos[0]['t_contactopersonasinfectadas']=="SI")$semaforonegacion="SI"; 
+
+            if ($semafororojo=="SI"){
+                $semaforo="3";
+            }
+            else    
+            {
+                if ($semaforonegacion=="SI"){
+                    $semaforo="2";
+                }
+                else
+                {
+                    $semaforo="1";    
+                }
+            }
+     
+
+
+        $campos['n_semaforo']=$semaforo;
+        //dd($campos);
+        
+        $resultado=Formulario::create($campos)->n_idformulario; //solo envia los que esten validados por CreateProjectRequest
+
+      //return redirect()->route('home')->with('status','La sede fue creado con éxito');
+
+      return redirect()->route('formulario.show', ['id' => $resultado])->with('status','El formulario se guardó con éxito');;
     }
 
     /**
@@ -123,9 +156,12 @@ class FormularioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Formulario $formulario)
     {
-        //
+      
+      return view('formulario.show', [
+            'formulario' => $formulario
+        ]);
     }
 
     /**
