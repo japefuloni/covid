@@ -22,10 +22,13 @@ use App\Entidades\Menus;
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <link rel="stylesheet" href= "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> 
+  
 <!-- jQuery -->
 <script src="/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.min.css">
 <!-- AdminLTE App -->
 <script src="/plugins/datatables/jquery.dataTables.js"></script>
 <script src="/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
@@ -34,6 +37,7 @@ use App\Entidades\Menus;
 <script src="/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
 <script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 <script src="/plugins/datatables-buttons/js/buttons.print.js"></script>
+<script src="/plugins/iCheck/icheck.min.js"></script>
 
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
@@ -44,10 +48,32 @@ use App\Entidades\Menus;
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js" type="text/javascript"></script>
 
+<!-- ickeck -->
+<link rel="stylesheet" href="/plugins/iCheck/all.css">
+<script src="/plugins/iCheck/icheck.min.js"></script>
+<!-- validator -->
+<link rel="stylesheet" href="/plugins/bootstrapvalidator/dist/css/bootstrapValidator.min.css">
+<script src="/plugins/bootstrapvalidator/dist/js/bootstrapValidator.min.js"></script>
+<script src="/plugins/bootstrapvalidator/dist/js/language/es_CO.js"></script>
+<!-- ---- -->
+<!-- Bootstrap -->
+{{-- <link rel="stylesheet" href="/plugins/bootstrap_v1/dist/css/bootstrap.min.css"> --}}
+{{-- <link rel="stylesheet" href="/plugins/bootstrap_v1/css/bootstrap.css">
+<link rel="stylesheet" href="/plugins/bootstrap_v1/css/bootstrap-theme.min.css"> --}}
+<!-- ---- -->
+<!-- ---- -->
 <script src="/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/dist/js/demo.js"></script>
-
+<script>  
+  $(function () {    
+    $('.formulario').bootstrapValidator();
+    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+        checkboxClass: 'icheckbox_flat-green',
+        radioClass   : 'iradio_flat-green'
+    });
+  });
+</script>
 
 </head>
 <style>
