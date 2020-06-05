@@ -34,7 +34,26 @@
                         <input type="text" class="form-control" maxlength="20" id="t_login" name="t_login"  placeholder="Usuario" value="{{ $administrador->t_login }}" required>
                    </div>
                 </div>
+            </div>
+            <div class="form-group has-feedback {{ $errors->has('password') ? 'has-error' : '' }}">
+                <label for="password">Pasword</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Digite el Password">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <label for="password_confirmation">Confirmar Password</label>
+                <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" placeholder="Confirmar password">
+                <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+            </div>
+            <div class="form-group ">
+                <label for="b_habilitado">Estado</label>
+                <input name="b_habilitado" id="b_habilitado" type="checkbox" {{ $administrador->b_habilitado==1 ? 'checked' : '' }} value="1" class="flat-red" > Activo
+            </div>
+            @if ($administrador->n_id!=null)
+            <div class="form-group ">
+                <p>Ultima actualización : {{ $administrador->dt_updated_at}}</p>
             </div>   
+            @endif
         </div>
         <div class="card-footer">
             <button type="submit" class="btn btn-primary pull-right">Guardar</button>
@@ -45,8 +64,7 @@
 @section('script-custom')
 <script>
     $(function () {      
-      $("#menuAdministrador" ).addClass("active" );      
-      
+      $("#menuAdministrador" ).addClass("active" );            
       /* $('#example1').DataTable({
         "paging": true,
         "lengthChange": false,
