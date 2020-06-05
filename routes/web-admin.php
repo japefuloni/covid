@@ -12,9 +12,10 @@ Route::get('/autenticar','Auth\LoginController@irLogin');
 #administradores
 Route::get('/administrador/listar','Administrador\ListarAdministradorController@index')->name('administrador.listar')->middleware('auth');
 Route::post('/administrador/listar','Administrador\ListarAdministradorController@seleccionar')->name('administrador.seleccionar')->middleware('auth');
+Route::get('/administrador/listar/nuevo','Administrador\ListarAdministradorController@envioNuevo')->name('administrador.listar.nuevo')->middleware('auth');
 
-/* Route::get('/usuario/usuario','Usuario\UsuarioController@showView')->name('usuario.mostrar')->middleware('auth');
-Route::post('/usuario/usuario','Usuario\UsuarioController@envioGuardar')->name('usuario.guardar')->middleware('auth');
+Route::get('/administrador/administrador','Administrador\AdministradorController@index')->name('administrador.mostrar')->middleware('auth');
+/* Route::post('/usuario/usuario','Usuario\UsuarioController@envioGuardar')->name('usuario.guardar')->middleware('auth');
 Route::get('/perfil','Usuario\PerfilController@showPerfil')->name('usuario.perfil')->middleware('auth');
 Route::post('/perfil/actualizar','Usuario\PerfilController@envioGuardarPerfil')->name('perfil.guardar')->middleware('auth'); */
 

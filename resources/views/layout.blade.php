@@ -119,7 +119,7 @@ use App\Entidades\Menus;
             with font-awesome or any other icon font library -->
         <li class="nav-item"><a id="menuHome"  href="{{ route('home') }}" class="nav-link"><p>Página Inicial</p></a></li>    
         <li class="nav-header">MENU PRINCIPAL</li> 
-        <li class="nav-item"><a href="{{ route('estadistica') }}" class="nav-link"> <i class="nav-icon fas fa-chart-pie"></i><p>Estadisticas</p></a></li>            
+        <li class="nav-item"><a id="menuEstadistica" href="{{ route('estadistica') }}" class="nav-link"> <i class="nav-icon fas fa-chart-pie"></i><p>Estadisticas</p></a></li>            
         @if (auth()->user()->n_id==1)
             <li class="nav-item"><a  id="menuAdministrador" href="{{ route('administrador.listar') }}" class="nav-link"> <i class="nav-icon fas fa-users-cog"></i><p>Administradores</p></a></li>    
         @endif
@@ -190,7 +190,7 @@ use App\Entidades\Menus;
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  @yield('script-cumstom')
+  @yield('script-custom')
   <footer class="main-footer">
     <div class="float-right d-none d-sm-block">
       <b>Version</b> 1.0.0

@@ -39,11 +39,17 @@ class ListarAdministradorController extends Controller
     */
     public function seleccionar(){
         if(request('idAdministradorSeleccionado')!=null){
-            Session::put('idAdministradorModificar',request('idAdministradorSeleccionado'));
-            return redirect()->route('administrador.mostrar');
+            Session::put('idAdministradorModificar',request('idAdministradorSeleccionado'));            
         }else{
-            Session::forget('idAdministradorModificar');
-            return redirect()->route('administrador.mostrar');
+            Session::forget('idAdministradorModificar');            
         }
+        return redirect()->route('administrador.mostrar');
+    }
+
+    public function envioNuevo()
+    {
+        //dd("Entro");
+        Session::forget('idAdministradorModificar');
+        return redirect()->route('administrador.mostrar');
     }
 }

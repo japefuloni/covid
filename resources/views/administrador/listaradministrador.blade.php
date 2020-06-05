@@ -4,6 +4,13 @@
 @section('elcontrolador','Menu')
 @section('laaccion','Administradores')
 @section('content')
+<div class="row">
+    <div class="col-xs-12">
+        <form action="{{ route('administrador.listar.nuevo') }}" method="get">
+            <button type="submit" class="btn btn-info pull-left">Nuevo</button>
+        </form>
+    </div>    
+</div>    
 <div class="table-responsive">
     <table id="example1" class="table table-bordered table-striped tbl">
         <thead>
@@ -52,7 +59,7 @@
 </div>
 
 @endsection
-@section('script-cumstom')
+@section('script-custom')
 <script>
     $(function () {      
       $("#menuAdministrador" ).addClass("active" );
@@ -62,11 +69,13 @@
         "paging": true,
         "lengthChange": false,
         "searching": true,
-        "ordering": true,
+        "ordering": false,
         "info": true,
         "autoWidth": false,
         "responsive": true,
         "language": { "url": "/plugins/datatables/locale/Spanish.json",},
+        "pageLength": 10,
+        "lengthMenu": [[10, 25, 50,100, -1], [10, 25, 50,100, "All"]],
       });
     });
   </script>
