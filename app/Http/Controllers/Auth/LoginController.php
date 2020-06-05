@@ -40,7 +40,7 @@ class LoginController extends Controller
                $this->logout();
            }
        }
-        return back()->withErrors(['email'=>trans('auth.failed')])->withInput(request(['email']));
+        return back()->withErrors(['usuario'=>trans('auth.failed')])->withInput(request(['usuario']));
     }
 
     public function auditoriaIngreso($request)

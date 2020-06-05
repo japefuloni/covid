@@ -22,4 +22,4 @@ Route::post('/perfil/actualizar','Usuario\PerfilController@envioGuardarPerfil')-
 
 
 
-Route::get('/estadistica','Auth\LoginController@showLoginForm')->name('estadistica');
+Route::get('/estadistica','Estadistica\EstadisticaController@index')->name('estadistica');
