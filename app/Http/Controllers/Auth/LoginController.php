@@ -35,12 +35,12 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
            if(auth()->user()->b_habilitado=='1'){               
                $this->auditoriaIngreso(request());               
-               return redirect()->route('estadisticas');
+               return redirect()->route('estadistica');
            } else{
                $this->logout();
            }
        }
-        return back()->withErrors(['email'=>trans('auth.failed')])->withInput(request(['email']));
+        return back()->withErrors(['usuario'=>trans('auth.failed')])->withInput(request(['usuario']));
     }
 
     public function auditoriaIngreso($request)
@@ -55,6 +55,12 @@ class LoginController extends Controller
      public function username()
      {
          return 't_login';
+     }
+
+     public function logout()
+     {
+             Auth::logout();
+             return redirect('/');
      }
 
 
