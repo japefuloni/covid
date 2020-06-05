@@ -57,5 +57,11 @@ class LoginController extends Controller
          return 't_login';
      }
 
+     public function logout()
+     {
+             Auth::logout();
+             return redirect('/');
+     }
+
 
 }

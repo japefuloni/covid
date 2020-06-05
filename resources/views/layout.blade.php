@@ -21,7 +21,7 @@ use App\Entidades\Menus;
   <link rel="stylesheet" href="/dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
+  <link rel="stylesheet" href= "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> 
 <!-- jQuery -->
 <script src="/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
@@ -54,6 +54,22 @@ use App\Entidades\Menus;
   .card-primary:not(.card-outline) > .card-header {
     background-color: #6a0d0d !important;
   }
+  .btn-primary:hover {
+        color: #fff;
+        background-color: #6a0d0d !important ;
+        border-color: #6a0d0d !important;
+    }
+    .btn-primary {
+        color: #fff;
+        background-color: #6a0d0d !important ;
+        border-color: #6a0d0d !important;
+    }
+    .pull-left {
+      float: left !important;
+    }
+    .pull-right {
+      float: right !important;
+    }
 </style>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -74,65 +90,35 @@ use App\Entidades\Menus;
     </a>
 
     <!-- Sidebar -->
-
-  
-
-    
-
-      @guest
-      <div class="sidebar">
-        <!-- Sidebar user (optional) -->
-          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-              <img src="/img/usr/guest.jpg" class="img-circle elevation-2" alt="User Image">
-            </div>
-            <div class="info">
-                
-              <a href="{{ route('login') }}" class="d-block">Administración</a>
-            </div>
-            
-      </div>
-      @endguest
-
-     
-      <!-- Sidebar Menu -->
-      @auth
-
-
-
-
-
-
-<nav class="mt-2">
-  <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-    <!-- Add icons to the links using the .nav-icon class
-         with font-awesome or any other icon font library -->
-    <li class="nav-item has-treeview menu-open">
-      <a href="{{ route('home') }}" class="nav-link active">
-        
-        <p>
-          Página Inicial
-          
-        </p>
-      </a>
       
-    </li>
-    
-    <?php echo Menus::leerMenu();?>
-    
-  </ul>
-</nav>
+<div class="sidebar">
+  <!-- Sidebar user (optional) -->
+  @guest
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img src="/img/usr/guest.jpg" class="img-circle elevation-2" alt="User Image">
+      </div>
+      <div class="info">                
+        <a href="{{ route('login') }}" class="d-block">Administración</a>
+      </div>
+    </div>
+ @endguest     
+      <!-- Sidebar Menu -->
+@auth
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Add icons to the links using the .nav-icon class
+            with font-awesome or any other icon font library -->
+        <li class="nav-item"><a id="menuHome"  href="{{ route('home') }}" class="nav-link"><p>Página Inicial</p></a></li>    
+        <li class="nav-header">MENU PRINCIPAL</li> 
+        <li class="nav-item"><a href="{{ route('estadisticas') }}" class="nav-link"> <i class="nav-icon fas fa-chart-pie"></i><p>Estadisticas</p></a></li>            
+        @if (auth()->user()->n_id==1)
+            <li class="nav-item"><a  id="menuAdministrador" href="{{ route('administrador.listar') }}" class="nav-link"> <i class="nav-icon fas fa-users-cog"></i><p>Administradores</p></a></li>    
+        @endif
+        <li class="nav-item"><a href="{{ route('logout') }}" class="nav-link"> <i class="nav-icon fas fa-sign-out-alt"></i><p>Salir</p></a></li>    
 
-
-
-
-
-
-
-
-
-
-
+      </ul>
+    </nav>
 @endauth
 
 
@@ -176,10 +162,10 @@ use App\Entidades\Menus;
           <h3 class="card-title">@yield('laaccion','laaccion')</h3>
 
           <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-              <i class="fas fa-minus"></i></button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fas fa-times"></i></button>
+            {{-- <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+              <i class="fas fa-minus"></i></button> --}}
+            {{-- <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove"> --}}
+              {{-- <i class="fas fa-times"></i></button> --}}
           </div>
         </div>
         <div class="card-body">
@@ -191,12 +177,12 @@ use App\Entidades\Menus;
         
       </div>
       <!-- /.card -->
-
+{{-- @yield('content_1') --}}
     </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
+  @yield('script-cumstom')
   <footer class="main-footer">
     <div class="float-right d-none d-sm-block">
       <b>Version</b> 1.0.0

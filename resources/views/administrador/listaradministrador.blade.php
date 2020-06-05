@@ -1,0 +1,88 @@
+@extends('layout')
+@section('title','Formulario COVID-19' )
+@section('titulopag','LISTADO DE ADMINISTRADORES')
+@section('elcontrolador','Menu')
+@section('laaccion','Administradores')
+@section('content')
+<div class="table-responsive">
+    <table id="example1" class="table table-bordered table-striped tbl">
+        <thead>
+            <tr>
+                <th class="text-center">Sel..</th>
+                <th>ID</th><th>Nombre</th><th>login</th>
+                <th>Sede</th>
+                <th>Email</th>
+                <th>Actualización</th>
+                <th class="text-center">Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($administradores as $adm)
+                <tr>
+                    <td class="text-center">
+                        <form method="POST" action="{{ route('administrador.seleccionar') }}">
+                            <input type="hidden" name="idAdministradorSeleccionado" value="{{ $adm->n_id }}">
+                            {!! csrf_field() !!}
+                            <button type="submit" class="btn btn-primary">
+                                <span class="fas fa-edit"></span>
+                            </button>
+                        </form>
+                    </td>
+                    <td>{{ $adm->n_id }}</td>
+                    <td>{{ $adm->t_nombrecompleto }}</td>
+                    <td>{{ $adm->t_login }}</td>
+                    <td>{{ $adm->sede->nombre ?? '' }}</td>
+                    <td>{{ $adm->t_email }}</td>
+                    <td>{{ $adm->dt_updated_at }}</td>
+                    <td class="text-center">
+                        @if ($adm->b_habilitado == 1)
+                            <span class="badge badge-success">Activo</span>
+                        @else
+                            <span class="badge badge-danger">Inactivo</span>
+                        @endif
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+        <tfoot>
+            {{-- <tr><th>ID</th><th>Nombre</th><th>Apellidos</th><th>Email</th>
+                <th>Actualización</th><th>Estado</th><th class="text-center">Seleccionar</th></tr> --}}
+        </tfoot>
+    </table>
+</div>
+
+@endsection
+@section('script-cumstom')
+<script>
+    $(function () {      
+      $("#menuAdministrador" ).addClass("active" );
+      //$("#menuHome" ).removeClass("active" );
+      
+      $('#example1').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+        "language": { "url": "/plugins/datatables/locale/Spanish.json",},
+      });
+    });
+  </script>
+@endsection
+
+{{-- <div class="col-md-12">                        
+    <button type="button" class="btn btn-primary">Nuevo</button>                             
+    <div class="card card-secondary">
+        <div class="card-header">
+          <h3 class="card-title">Listado</h3>              
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+        </div>
+        {{-- <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>     --}}
+    {{-- </div>     
+</div> --}}

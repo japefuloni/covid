@@ -19,7 +19,7 @@ else {
 <h4>Bienvenido a la página inicial del Aplicativo de Control de Ingreso UPB</h4><br>
 
 <h4><p class="text-danger">Documento</p></h4>
- @guest
+ {{-- @guest --}}
 
  <form action="{{ route('revisar')}}" method="POST">
     @include('revisar._form',['btnText'=>'Guardar'])
@@ -27,5 +27,13 @@ else {
 
 <br><br>
 
-@endguest
+{{-- @endguest --}}
+@endsection
+@section('script-cumstom')
+<script>
+    $(function () {      
+      $("#menuHome" ).addClass("active" );            
+      
+    });
+  </script>
 @endsection
