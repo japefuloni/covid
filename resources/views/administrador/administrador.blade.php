@@ -5,10 +5,7 @@
 @section('laaccion','Administradores')
 @section('content')
 <div class="col-md-6">
-    <form class="formulario" role="form" id="frmAdministrador" data-toggle="validator" method="post" action="{{ route('administrador.guardar') }}"
-        data-bv-feedbackicons-valid="glyphicon glyphicon-ok" 
-        data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
-        data-bv-feedbackicons-validating="glyphicon glyphicon-refresh" >    
+    <form class="formulario1" role="form" id="frmAdministrador"  method="post" action="{{ route('administrador.guardar') }}"        
         {{ csrf_field() }}
     <div class="card card-secondary">
         <div class="card-header">
@@ -22,7 +19,7 @@
                 <input type="text" class="form-control" id="t_nombrecompleto" name="t_nombrecompleto" placeholder="Digite el nombre completo"
                 value="{{ $administrador->t_nombrecompleto }}" required>
             </div>
-            <div class="form-group {{ $errors->has('t_email') ? 'has-error' : '' }}">
+            <div id="prueba" class="form-group {{ $errors->has('t_email') ? 'has-error' : '' }}">
                 <label for="email-d">Email</label>
                 @if ($administrador->n_id!=null)
                     <input type="email"  class="form-control" name="email-d" id="email-d" value="{{$administrador->t_email}}" disabled />
@@ -32,7 +29,7 @@
                     value="{{$administrador->t_email}}"  required>
                 @endif                            
             </div>
-            <div class="form-group has-feedback is-invalid{{ $errors->has('t_idinstrumento') ? 'has-error' : '' }}"  id="grupoInstrumento" >
+            <div class="form-group has-feedback  {{ $errors->has('t_idinstrumento') ? 'has-error' : '' }}"  id="grupoInstrumento" >
                 <label for="n_idciudad" class="control-label">Ciudad *</label>                
                 <div class="row">
                     <div class="col-7">
@@ -71,8 +68,7 @@
                 <label for="password_confirmation">Confirmar Password</label>
                 <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" placeholder="Confirmar password">
                 <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
-            </div>
-            
+            </div>           
             
             
             <div class="form-group ">
@@ -97,6 +93,8 @@
 <script>
     $(function () {      
       $("#menuAdministrador" ).addClass("active" );                  
+      $("#n_idciudad" ).addClass("is-invalid" );                  
+      
     });
   </script>
 @endsection
