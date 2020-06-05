@@ -13,7 +13,13 @@ Route::get('/autenticar','Auth\LoginController@irLogin');
 Route::get('/administrador/listar','Administrador\ListarAdministradorController@index')->name('administrador.listar')->middleware('auth');
 Route::post('/administrador/listar','Administrador\ListarAdministradorController@seleccionar')->name('administrador.seleccionar')->middleware('auth');
 
+/* Route::get('/usuario/usuario','Usuario\UsuarioController@showView')->name('usuario.mostrar')->middleware('auth');
+Route::post('/usuario/usuario','Usuario\UsuarioController@envioGuardar')->name('usuario.guardar')->middleware('auth');
+Route::get('/perfil','Usuario\PerfilController@showPerfil')->name('usuario.perfil')->middleware('auth');
+Route::post('/perfil/actualizar','Usuario\PerfilController@envioGuardarPerfil')->name('perfil.guardar')->middleware('auth'); */
 
 
 
-Route::get('/estadisticas','Auth\LoginController@showLoginForm')->name('estadisticas');
+
+
+Route::get('/estadistica','Auth\LoginController@showLoginForm')->name('estadistica');

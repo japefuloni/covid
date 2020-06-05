@@ -35,7 +35,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
            if(auth()->user()->b_habilitado=='1'){               
                $this->auditoriaIngreso(request());               
-               return redirect()->route('estadisticas');
+               return redirect()->route('estadistica');
            } else{
                $this->logout();
            }

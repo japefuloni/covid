@@ -105,13 +105,21 @@ use App\Entidades\Menus;
  @endguest     
       <!-- Sidebar Menu -->
 @auth
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img src="/img/usr/guest.jpg" class="img-circle elevation-2" alt="User Image">
+      </div>
+      <div class="info">                
+      <a href="#" class="d-block">{{auth()->user()->t_nombrecompleto}}</a>
+      </div>
+    </div>
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
             with font-awesome or any other icon font library -->
         <li class="nav-item"><a id="menuHome"  href="{{ route('home') }}" class="nav-link"><p>Página Inicial</p></a></li>    
         <li class="nav-header">MENU PRINCIPAL</li> 
-        <li class="nav-item"><a href="{{ route('estadisticas') }}" class="nav-link"> <i class="nav-icon fas fa-chart-pie"></i><p>Estadisticas</p></a></li>            
+        <li class="nav-item"><a href="{{ route('estadistica') }}" class="nav-link"> <i class="nav-icon fas fa-chart-pie"></i><p>Estadisticas</p></a></li>            
         @if (auth()->user()->n_id==1)
             <li class="nav-item"><a  id="menuAdministrador" href="{{ route('administrador.listar') }}" class="nav-link"> <i class="nav-icon fas fa-users-cog"></i><p>Administradores</p></a></li>    
         @endif
