@@ -17,7 +17,8 @@
             <tr>
                 <th class="text-center">Sel..</th>
                 <th>ID</th><th>Nombre</th><th>login</th>
-                <th>Sede</th>
+                <th>Ciudad</th>
+                <th>Todas</th>
                 <th>Email</th>
                 <th>Actualización</th>
                 <th class="text-center">Estado</th>
@@ -37,8 +38,15 @@
                     </td>
                     <td>{{ $adm->n_id }}</td>
                     <td>{{ $adm->t_nombrecompleto }}</td>
-                    <td>{{ $adm->t_login }}</td>
-                    <td>{{ $adm->sede->nombre ?? '' }}</td>
+                    <td>{{ $adm->t_login }}</td>                    
+                    <td>{{ $adm->ciudad->t_nombre ?? '' }}</td>
+                    <td class="text-center">
+                        @if ($adm->b_todas == 1)
+                            <span class="badge badge-success">Si</span>
+                        @else
+                            {{-- <span class="badge badge-danger">No</span> --}}
+                        @endif
+                    </td>
                     <td>{{ $adm->t_email }}</td>
                     <td>{{ $adm->dt_updated_at }}</td>
                     <td class="text-center">

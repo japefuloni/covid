@@ -11,6 +11,6 @@ class Ciudad extends Model
     const CREATED_AT = 'dt_created_at';
     const UPDATED_AT = 'dt_updated_at';
 
-    protected $fillable = ['n_nombre','b_habilitado'];
+    protected $fillable = ['t_nombre','b_habilitado'];
     
 }

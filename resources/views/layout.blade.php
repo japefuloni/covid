@@ -52,15 +52,11 @@ use App\Entidades\Menus;
 <link rel="stylesheet" href="/plugins/iCheck/all.css">
 <script src="/plugins/iCheck/icheck.min.js"></script>
 <!-- validator -->
-<link rel="stylesheet" href="/plugins/bootstrapvalidator/dist/css/bootstrapValidator.min.css">
-<script src="/plugins/bootstrapvalidator/dist/js/bootstrapValidator.min.js"></script>
-<script src="/plugins/bootstrapvalidator/dist/js/language/es_CO.js"></script>
+
 <!-- ---- -->
-<!-- Bootstrap -->
-{{-- <link rel="stylesheet" href="/plugins/bootstrap_v1/dist/css/bootstrap.min.css"> --}}
-{{-- <link rel="stylesheet" href="/plugins/bootstrap_v1/css/bootstrap.css">
-<link rel="stylesheet" href="/plugins/bootstrap_v1/css/bootstrap-theme.min.css"> --}}
-<!-- ---- -->
+<!-- jquery-validation -->
+<script src="/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="/plugins/jquery-validation/additional-methods.min.js"></script>
 <!-- ---- -->
 <script src="/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
@@ -149,6 +145,7 @@ use App\Entidades\Menus;
         @if (auth()->user()->n_id==1)
             <li class="nav-item"><a  id="menuAdministrador" href="{{ route('administrador.listar') }}" class="nav-link"> <i class="nav-icon fas fa-users-cog"></i><p>Administradores</p></a></li>    
         @endif
+        <li class="nav-item"><a  id="menuPerfil" href="{{ route('administrador.perfil') }}" class="nav-link"> <i class="nav-icon fas fa-user-tie"></i><p>Cambio Contraseña</p></a></li>
         <li class="nav-item"><a href="{{ route('logout') }}" class="nav-link"> <i class="nav-icon fas fa-sign-out-alt"></i><p>Salir</p></a></li>    
 
       </ul>

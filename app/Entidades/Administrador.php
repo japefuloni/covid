@@ -17,7 +17,7 @@ class Administrador extends Authenticatable
     const CREATED_AT = 'dt_created_at';
     const UPDATED_AT = 'dt_updated_at';
 
-    protected $fillable = ['t_nombrecompleto', 't_login','n_idsede','t_email','b_habilitado'];
+    protected $fillable = ['t_nombrecompleto', 't_login','n_idciudad','t_email','b_habilitado'];
     
     protected $guarded =['t_password'];
 
@@ -28,7 +28,7 @@ class Administrador extends Authenticatable
       return $this->t_password;
     }
 
-    /* public function sede(){
-        return $this->hasMany('App\Model\UsuarioRol','n_idusuario','n_idusuario');
-    } */
+    public function ciudad(){
+        return $this->belongsTo('App\Entidades\Ciudad','n_idciudad','n_id');
+    } 
 }
