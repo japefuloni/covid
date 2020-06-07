@@ -146,6 +146,9 @@ use App\Entidades\Menus;
             <li class="nav-item"><a  id="menuAdministrador" href="{{ route('administrador.listar') }}" class="nav-link"> <i class="nav-icon fas fa-users-cog"></i><p>Administradores</p></a></li>    
         @endif
         <li class="nav-item"><a  id="menuPerfil" href="{{ route('administrador.perfil') }}" class="nav-link"> <i class="nav-icon fas fa-user-tie"></i><p>Cambio Contraseña</p></a></li>
+        @if (auth()->user()->n_id==1)
+        <li class="nav-item"><a  id="menuUsuario" href="{{ route('users.index') }}" class="nav-link"> <i class="nav-icon fas fa-user"></i><p>Usuarios</p></a></li>    
+        @endif
         <li class="nav-item"><a href="{{ route('logout') }}" class="nav-link"> <i class="nav-icon fas fa-sign-out-alt"></i><p>Salir</p></a></li>    
 
       </ul>
