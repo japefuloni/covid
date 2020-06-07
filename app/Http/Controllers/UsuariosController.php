@@ -8,6 +8,7 @@ use App\Entidades\Menus;
 use Auth;
 use App\Entidades\Sedes;
 use App\Entidades\Vinculou;
+use DB;
 
 
 //Importanto las validaciones
@@ -128,5 +129,15 @@ class UsuariosController extends Controller
     {
       $users->delete();
       return redirect()->route('users.index')->with('status','La Sede fue eliminada con éxito');;
+    }
+
+
+    public function getListaUsuarios()
+    {
+      return datatables()->query(DB::table('users'))
+        ->addColumn('action', function ($registro) {
+        return '<a href="'.route('users.show', $registro->n_idusuario).'"> Ver</a>';
+    })
+    ->toJson();
     }
 }

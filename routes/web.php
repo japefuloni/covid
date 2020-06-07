@@ -31,7 +31,7 @@ Route::get('usuarios/editar/{usuarios}', 'UsuariosController@editar')->name('usu
 Route::post('revisar', 'RevisarController@verificar')->name('revisar');
 
 
-Route::get('losusuarios', function(){
+/* Route::get('losusuarios', function(){
     return datatables()
     ->query(DB::table('users'))
     ->addColumn('action', function ($registro) {
@@ -43,6 +43,8 @@ Route::get('losusuarios', function(){
     })
     ->toJson();
 
-});
+}); */
+Route::get('losusuarios', 'UsuariosController@getListaUsuarios')->name('losusuarios');
+
 
 Auth::routes();
