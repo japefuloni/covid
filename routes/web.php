@@ -1,4 +1,5 @@
 <?php
+use DB;
 include ('web-admin.php');
 /*
 |--------------------------------------------------------------------------
@@ -28,5 +29,20 @@ Route::get('usuarios/editar/{usuarios}', 'UsuariosController@editar')->name('usu
 
 
 Route::post('revisar', 'RevisarController@verificar')->name('revisar');
+
+
+Route::get('losusuarios', function(){
+    return datatables()
+    ->query(DB::table('users'))
+    ->addColumn('action', function ($registro) {
+        return 
+        '
+        <a href="'.route('users.show', $registro->n_idusuario).'"> Ver</a>
+
+       ';
+    })
+    ->toJson();
+
+});
 
 Auth::routes();

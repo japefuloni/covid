@@ -21,7 +21,7 @@
         $('#example1').DataTable( {
             responsive: true,
             "serverSide": true,
-            "ajax": "{{ url('api/losusuarios') }}",
+            "ajax": "{{ url('losusuarios') }}",
             "columns": [
                 {data: 'action' },             
                 {data: 't_nombres' },
