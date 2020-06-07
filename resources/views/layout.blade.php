@@ -142,6 +142,29 @@ use App\Entidades\Menus;
         <li class="nav-item"><a id="menuHome"  href="{{ route('home') }}" class="nav-link"><p>Página Inicial</p></a></li>    
         <li class="nav-header">MENU PRINCIPAL</li> 
         <li class="nav-item"><a id="menuEstadistica" href="{{ route('estadistica') }}" class="nav-link"> <i class="nav-icon fas fa-chart-pie"></i><p>Estadisticas</p></a></li>            
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-database"></i>
+            <p>Reportes<i class="right fas fa-angle-left"></i></p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="./index.html" class="nav-link">
+                <i class="far fa-circle text-info nav-icon"></i><p>Reporte 1</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./index2.html" class="nav-link">
+                <i class="far fa-circle text-info nav-icon"></i><p>Reporte 2</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./index3.html" class="nav-link">
+                <i class="far fa-circle text-info nav-icon"></i><p>Reporte 3</p>
+              </a>
+            </li>
+          </ul>
+        </li>
         @if (auth()->user()->n_id==1)
             <li class="nav-item"><a  id="menuAdministrador" href="{{ route('administrador.listar') }}" class="nav-link"> <i class="nav-icon fas fa-users-cog"></i><p>Administradores</p></a></li>    
         @endif
