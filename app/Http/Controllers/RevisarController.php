@@ -56,15 +56,27 @@ class RevisarController extends Controller
           $formhoy=Formulario::where([
               ['n_idusuario', '=', $idusuario],
               ['created_at', '>', $fechahoy],
+              ['t_activo', '=', "SI"],
           ])->first();
 
           
 
           if (!is_null($formhoy)) $contestohoy="SI";
 
-          Session::put('idUsuario',$idusuario);
+          if ($contestohoy=="SI"){
+              $hoyformulario=$formhoy->n_idformulario;
+              return redirect()->route('formulario.show', ['id' => $hoyformulario])->with('status','Resultado Previamente Guardado');
+
+          }
+          else
+          {
+            Session::put('idUsuario',$idusuario);
 
           return redirect()->route('formulario.create');
+
+          }
+
+          
 
                  
 

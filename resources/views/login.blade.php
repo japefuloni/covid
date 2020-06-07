@@ -13,8 +13,11 @@ else {
 ?>
 
 @section('nombusuario', $nombrecompleto )
+@include('partials.session-status')
 
 @section('content')
+
+
 
 <h4>Bienvenido a la página inicial del Aplicativo de Control de Ingreso UPB</h4><br>
 

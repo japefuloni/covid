@@ -16,7 +16,7 @@ if ($errorenform=="Usuario No Existe")
   {
   ?>
   <h4>Usuario no Registrado. Por favor haga su proceso de Registro</h4><br>
-  <a href="{{ route('register') }}" class="btn btn-warning">Registrarse</a>
+  <a href="{{ route('users.create') }}" class="btn btn-warning">Registrarse</a>
   <?php
   }
 else 

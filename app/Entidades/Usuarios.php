@@ -6,7 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class Usuarios extends Authenticatable
 {
     use Notifiable;
 
@@ -41,10 +41,5 @@ class User extends Authenticatable
     public function vinculou()
 	{
 		 return $this->belongsTo('App\Entidades\Vinculou','n_idvinculou');
-    }
-
-    public function sede()
-	{
-		 return $this->belongsTo('App\Entidades\Sedes','n_idsede');
     }
 }

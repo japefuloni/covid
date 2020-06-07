@@ -1,3 +1,5 @@
+
+
 @csrf
 
 
@@ -11,7 +13,7 @@
 <div class="col-md-6">
     <div class="card card-info">
       <div class="card-header">
-        <h3 class="card-title">Consentimiento</h3>
+      <h3 class="card-title">Consentimiento: <strong>{{$usuarioesta->c_codtipo}}. {{$usuarioesta->t_documento}} - {{$usuarioesta->t_nombres}} {{$usuarioesta->t_apellidos}}</strong></h3>
 
         <div class="card-tools">
           
@@ -52,41 +54,41 @@
                 >{{ $sede->t_sede }}</option> 
         @endforeach
         </select>
-</label><br>
+</label><br> 
 <br>
 <label>
     3. ¿Usted irá hoy a la Universidad o a una de sus sedes?
 </label><br>
-<input   type="radio" name="t_irahoy" value="SI" {{(old('t_irahoy') == 'SI') ? 'checked' : ''}}> SI &nbsp;&nbsp;&nbsp;
-<input   type="radio" name="t_irahoy" value="NO" {{(old('t_irahoy') == 'NO') ? 'checked' : ''}}> NO<br>
+<input   type="radio" name="t_irahoy" id="SI" value="SI" {{(old('t_irahoy') == 'SI') ? 'checked' : ''}}> SI &nbsp;&nbsp;&nbsp;
+<input   type="radio" name="t_irahoy" id="NO" value="NO" {{(old('t_irahoy') == 'NO') ? 'checked' : ''}}> NO<br>
 
 
 <br>
-<label>
+<label id="lt_sitios" name="lt_sitios">
     4. Indique el o los sitios donde realizará sus actividades
-<input class="form-control" type="text" name="t_sitios" placeholder="Puede digitar no" value="{{ old('t_sitios') }}">
+<input class="form-control" type="text" id="t_sitios" name="t_sitios" placeholder="Indique el sitio" value="{{ old('t_sitios') }}">
 </label>
 <br>
 
 <br>
-<label>
+<label  id="lt_actividades">
     5. Actividades que realizará en la Universidad, objeto de solicitud de permiso
-<input class="form-control" type="text" name="t_actividades" placeholder="Puede digitar no" value="{{ old('t_actividades') }}">
+<input class="form-control" type="text" name="t_actividades" placeholder="Llene con resumen actividades" value="{{ old('t_actividades') }}">
 </label>
 <br>
 
 <br>
-<label>
+<label id="lt_actividades">
     6. ¿Presenta fiebre (temperatura superior a 38º C, cuantificada con termómetro)?
 </label><br>
 <input   type="radio" name="t_presentadofiebre" value="SI" {{(old('t_presentadofiebre') == 'SI') ? 'checked' : ''}}> SI &nbsp;&nbsp;&nbsp;
 <input   type="radio" name="t_presentadofiebre" value="NO" {{(old('t_presentadofiebre') == 'NO') ? 'checked' : ''}}> NO<br>
 
 <br>
-<label>
+<label id="lt_diasfiebre">
     7. En caso de haber presentado fiebre mayor a 38°C, ¿por cuántos días la ha presentado? (formato de número en la respuesta)
 </label>
-<input size="10" class="form-control col-md-1" type="number" name="t_diasfiebre" placeholder="valor #" value="{{ old('t_diasfiebre') }}">
+<input size="10" class="form-control col-md-1" type="number" id="t_diasfiebre" name="t_diasfiebre" placeholder="Puede digitar 0" value="{{ old('t_diasfiebre') }}">
 
 <br>
 <label>
@@ -132,7 +134,7 @@
 <input   type="radio" name="t_contactopersonasinfectadas" value="NO" {{(old('t_contactopersonasinfectadas') == 'NO') ? 'checked' : ''}}> NO<br>
 
 <br>
-<label>
+<label id="ld_ultimocontacto">
     14. En caso de que en la anterior pregunta haya marcado "Sí", ¿en qué fecha se presentó el último contacto con la persona infectada? 
 </label><br>
 <input class="form-control col-md-2" type="date" id="d_ultimocontacto" name="d_ultimocontacto" value="{{ old('d_ultimocontacto') }}"><br>

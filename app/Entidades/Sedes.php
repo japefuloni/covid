@@ -21,4 +21,9 @@ class Sedes extends Model
     {
         return $this->hasMany('App\Entidades\Formulario','n_idsede');
     }
+
+    public function usuario()
+    {
+        return $this->hasMany('App\User','n_idusuario');
+    }
 }

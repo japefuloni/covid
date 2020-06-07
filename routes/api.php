@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +14,18 @@ use Illuminate\Http\Request;
 |
 */
 
-/* Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+  
+
+Route::get('losusuarios', function(){
+    return datatables()
+    ->query(DB::table('users'))
+    ->addColumn('action', function ($registro) {
+        return 
+        '
+        <a href="'.route('users.show', $registro->n_idusuario).'"> Ver</a>
+
+       ';
+    })
+    ->toJson();
+
 });
- */

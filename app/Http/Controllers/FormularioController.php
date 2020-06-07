@@ -147,7 +147,7 @@ class FormularioController extends Controller
 
       //return redirect()->route('home')->with('status','La sede fue creado con éxito');
 
-      return redirect()->route('formulario.show', ['id' => $resultado])->with('status','El formulario se guardó con éxito');;
+      return redirect()->route('formulario.show', ['id' => $resultado])->with('status','El formulario se guardó con éxito');
     }
 
     /**
