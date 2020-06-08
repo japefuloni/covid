@@ -69,19 +69,19 @@ class FormularioController extends Controller
         return datatables()->of($query)
         ->addColumn('action', function ($registro) {
             if ($registro->activo=="SI")return '<a href="'.route('formulario.updateinac', $registro->n_idformulario).'"> Inactivar</a>';
-            if ($registro->activo=="NO")return 'DESACTIVO';
+            if ($registro->activo=="NO")return 'DESACTIVADO';
 
         
     })
     ->addColumn('semaforo', function ($registro) {
-        if ($registro->n_semaforo=="1")return '<strong>Verde</strong>';
-        if ($registro->n_semaforo=="2")return 'Amarillo';
-        if ($registro->n_semaforo=="3")return 'Rojo';
+        if ($registro->n_semaforo=="1")return '<strong class="text-success">Verde</strong>';
+        if ($registro->n_semaforo=="2")return '<strong class="text-warning">Amarillo</strong>';
+        if ($registro->n_semaforo=="3")return '<strong class="text-danger">Rojo</strong>';
     })
     ->addColumn('ingreso', function ($registro) {
-    if ($registro->n_semaforo=="1")return 'SI';
-    if ($registro->n_semaforo=="2")return 'NO';
-    if ($registro->n_semaforo=="3")return 'NO';
+    if ($registro->n_semaforo=="1")return '<strong class="text-success">SI</strong>';
+    if ($registro->n_semaforo=="2")return '<strong class="text-danger">NO</strong>';
+    if ($registro->n_semaforo=="3")return '<strong class="text-danger">NO</strong>';
     })
     ->rawColumns(['action','semaforo','ingreso'])
     ->toJson();
@@ -94,7 +94,7 @@ class FormularioController extends Controller
         
         $affected = DB::table('formulario')
               ->where('n_idformulario', $request)
-              ->update(['t_activo' => "NO", 'n_iddesactiva' => Auth::id()]);
+              ->update(['t_activo' => "NO", 'n_iddesactiva' => Auth::id(),'updated_at'=>date('Y-m-d H:i:s')]);
         return redirect()->route('formulario.inactivar')->with('status','El formulario fue actualizado con éxito');
 
 
@@ -102,7 +102,7 @@ class FormularioController extends Controller
    
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new resource. 
      *
      * @return \Illuminate\Http\Response
      */

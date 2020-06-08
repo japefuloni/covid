@@ -24,13 +24,13 @@
           "ajax": "{{ url('losformularios') }}",
           "columns": [
               {data: 'action' }, 
-              {data: 't_activo' },
+              {data: 'activo' },
               
               {data: 'updated_at' },            
               
               {data: 'nombrec' },
               {data: 'semaforo' },
-              {data: 'ingreso' },
+              {data: 'ingreso' }
               
               
 
@@ -62,25 +62,25 @@
             {
                  extend: 'copy',
                  exportOptions: {
-                 columns: [  1, 2, 3, 4, 5, 6 ] //Your Colume value those you want
+                 columns: [  0, 1, 2, 3, 4, 5 ] //Your Colume value those you want
                      }
                    },
                   {
                  extend: 'print',
                  exportOptions: {
-                 columns: [  1, 2, 3, 4, 5, 6 ] //Your Colume value those you want
+                 columns: [ 0, 1, 2, 3, 4, 5 ] //Your Colume value those you want
                      }
                    },
                    {
                     extend: 'excel',
                     exportOptions: {
-                    columns: [  1, 2, 3, 4, 5, 6 ] //Your Colume value those you want
+                    columns: [ 0, 1, 2, 3, 4, 5 ] //Your Colume value those you want
                    }
                  },
                  {
                     extend: 'pdf',
                     exportOptions: {
-                    columns: [  1, 2, 3, 4, 5, 6 ] //Your Colume value those you want
+                    columns: [  0 , 1, 2, 3, 4, 5 ] //Your Colume value those you want
                    }
                  },
                ],
@@ -103,21 +103,20 @@
 
 <div class="card">
     <div class="card-header">
-      <h3 class="card-title">Listado de Formularios a los que tiene acceso Diligenciados el día de Hoy: <strong> <?php echo date('Y-m-d');?></strong></h3>
+      <h3 class="card-title">Listado de Formularios a los que tiene acceso. Diligenciados el día de Hoy: <strong> <?php echo date('Y-m-d');?></strong></h3>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
             <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
                     <thead>
                     <tr role="row">
-                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="FAcultad: activate to sort column ascending" style="width: 50px;">Acción</th>
-                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Escuela: activate to sort column ascending" style="width: 50px;">Activo</th>
-
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Accion: activate to sort column ascending" style="width: 50px;">Acción</th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Activo: activate to sort column ascending" style="width: 50px;">Activo</th>
                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Jefe: activate to sort column ascending" style="width: 320px;">Fecha y Hora de Presentación</th>
-                        
-                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 176px;">Usuario</th>
-                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 176px;">Resultado</th>
-                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 176px;">Ingreso</th>
+                  
+                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Usuario: activate to sort column ascending" style="width: 176px;">Usuario</th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Resultado: activate to sort column ascending" style="width: 176px;">Resultado</th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Ingreso: activate to sort column ascending" style="width: 176px;">Ingresó</th>
                     </tr>
                     </thead>
                     
