@@ -16,12 +16,14 @@ include ('web-admin.php');
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('formulario/inactivar', 'FormularioController@inactivar')->name('formulario.inactivar')->middleware('auth');
+Route::get('formulario/{id}/updateinac', 'FormularioController@updateinac')->name('formulario.updateinac')->middleware('auth');
 Route::view('/','home', ['nombre'=>'Jairo Peña Fuentes'])->name('home');
 
 Route::view('inicio','inicio', ['nombre'=>'Jairo Peña Fuentes'])->name('inicio');
 //Route::resource('sedes', 'SedesController')->names('sedes')->parameters(['sedes'  =>  'sedes'])->middleware('role:1|2');
 Route::resource('formulario', 'FormularioController')->names('formulario')->parameters(['formulario'  =>  'formulario']);//->middleware('role:1|2');
+
 
 Route::resource('users', 'UsersController')->names('users')->parameters(['users'  =>  'users']);//->middleware('role:1|2');
 Route::resource('usuarios', 'UsuariosController')->names('usuarios')->parameters(['usuarios'  =>  'usuarios']);//->middleware('role:1|2');
@@ -46,6 +48,7 @@ Route::post('revisar', 'RevisarController@verificar')->name('revisar');
 
 }); */
 Route::get('losusuarios', 'UsuariosController@getListaUsuarios')->name('losusuarios');
+Route::get('losformularios', 'FormularioController@getListaFormularios')->name('losformularios');
 
 
 Auth::routes();

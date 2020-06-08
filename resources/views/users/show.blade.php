@@ -84,4 +84,12 @@
 
 @endsection
 
+@section('script-custom')
+<script>
+    $(function () {      
+      $("#menuUsuario" ).addClass("active" );
+     });
+  </script>
+@endsection
+
 

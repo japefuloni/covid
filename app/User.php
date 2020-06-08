@@ -48,4 +48,9 @@ class User extends Authenticatable
 	{
 		 return $this->belongsTo('App\Entidades\Sedes','n_idsede');
     }
+
+    public function formulario()
+    {
+        return $this->hasMany('App\Entidades\Formulario','n_idusuario');
+    }
 }

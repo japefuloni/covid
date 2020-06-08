@@ -10,6 +10,7 @@ use Session;
 //Importanto las validaciones
 use App\Http\Requests\SaveFormularioRequest;
 use DB;
+use Auth;
 
 class FormularioController extends Controller
 {
@@ -34,6 +35,69 @@ class FormularioController extends Controller
         [
             'formulario'=> Formulario::orderBy('n_idusuario','ASC')->paginate(10)
         ]);  
+    }
+
+
+    public function inactivar()
+    {
+      /*
+      var_dump(auth()->user()->n_idciudad);
+      var_dump(auth()->user()->ciudad->t_nombre);
+      var_dump(auth()->user()->n_id);
+      var_dump(Auth::id());
+*/ 
+      
+      return view('formulario.inactivar', 
+        [
+            'sedes'=> Sedes::orderBy('t_sede','ASC')->paginate(10)
+        ]);  
+    }
+
+    public function getListaFormularios()
+    {
+      $id_ciudad=auth()->user()->n_idciudad;
+      $fechahoy=date('Y-m-d 00:00:00');
+
+      $elselect= "select *,CONCAT('(',us.c_codtipo,' ',us.t_documento,') ',us.t_nombres,' ',us.t_apellidos) as nombrec, fo.t_activo as activo from formulario fo,sedes se, users us where se.n_idsede=fo.n_idsede and se.n_idciudad=".$id_ciudad;
+      $elselect .= " and fo.updated_at>='".$fechahoy."'";
+      $elselect .= " and us.n_idusuario=fo.n_idusuario";
+      
+        $query = DB::select($elselect);
+
+        //dd($query);
+      
+        return datatables()->of($query)
+        ->addColumn('action', function ($registro) {
+            if ($registro->activo=="SI")return '<a href="'.route('formulario.updateinac', $registro->n_idformulario).'"> Inactivar</a>';
+            if ($registro->activo=="NO")return 'DESACTIVO';
+
+        
+    })
+    ->addColumn('semaforo', function ($registro) {
+        if ($registro->n_semaforo=="1")return '<strong>Verde</strong>';
+        if ($registro->n_semaforo=="2")return 'Amarillo';
+        if ($registro->n_semaforo=="3")return 'Rojo';
+    })
+    ->addColumn('ingreso', function ($registro) {
+    if ($registro->n_semaforo=="1")return 'SI';
+    if ($registro->n_semaforo=="2")return 'NO';
+    if ($registro->n_semaforo=="3")return 'NO';
+    })
+    ->rawColumns(['action','semaforo','ingreso'])
+    ->toJson();
+    }
+
+    public function updateinac($request)
+    {
+       
+        //return $request;
+        
+        $affected = DB::table('formulario')
+              ->where('n_idformulario', $request)
+              ->update(['t_activo' => "NO", 'n_iddesactiva' => Auth::id()]);
+        return redirect()->route('formulario.inactivar')->with('status','El formulario fue actualizado con éxito');
+
+
     }
    
 

@@ -22,3 +22,11 @@
 
     
 @endsection
+
+@section('script-custom')
+<script>
+    $(function () {      
+      $("#menuSedes" ).addClass("active" );
+     });
+  </script>
+@endsection

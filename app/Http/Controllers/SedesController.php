@@ -11,8 +11,10 @@ use DB;
 use Log;
 use Exception;
 
+
 //Importanto las validaciones
 use App\Http\Requests\SaveSedeRequest;
+
 
 class SedesController extends Controller
 {
@@ -33,7 +35,12 @@ class SedesController extends Controller
      */
     public function index()
     {
-      
+      /*
+      var_dump(auth()->user()->n_idciudad);
+      var_dump(auth()->user()->ciudad->t_nombre);
+      var_dump(auth()->user()->n_id);
+      var_dump(Auth::id());
+*/ 
       
       return view('sedes.index', 
         [

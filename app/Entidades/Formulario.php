@@ -42,7 +42,7 @@ class Formulario extends Model
     protected $table = 'formulario'; //Esta line se pone si la tabla se llama de manera diferente
 
 
-    public function usuario()
+    public function usuario() //trae los datos de usuario
 	{
 		 return $this->belongsTo('App\User','n_idusuario');
     }
