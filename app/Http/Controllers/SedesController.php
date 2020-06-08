@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Entidades\Ciudad;
 use App\Entidades\Sedes;
-
+use DB;
+use Log;
+use Exception;
 
 //Importanto las validaciones
 use App\Http\Requests\SaveSedeRequest;
@@ -116,7 +118,16 @@ class SedesController extends Controller
      */
     public function destroy(Sedes $sedes)
     {
-      $sedes->delete();
+      try {
+        DB::beginTransaction();           
+        $sedes->delete();  
+        DB::commit();
+      } catch (Exception $e) {
+        DB::rollBack();
+        Log::error($e);            
+        return redirect()->route('sedes.index')->with('error','Error: No se puede eliminar consulte al administrador del sistema  ');;        
+      }
+      
       return redirect()->route('sedes.index')->with('status','La Sede fue eliminada con éxito');;
     }
 }
