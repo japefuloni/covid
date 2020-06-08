@@ -45,11 +45,11 @@
   </form>      
 </div>
 <div class="row">
-  <section class="col-lg-7 connectedSortable">
+  <section class="col-lg-3 connectedSortable">
     <div class="">
         <div class="card card-info">
             <div class="card-header with-border">
-              <h3 class="card-title">Servicios por día</h3>
+              <h3 class="card-title">{{ Config::get('pregunta.fiebre') }}</h3>
               <div class="card-tools">
                 <button type="button" class="btn btn-tool btn-sm" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                   <i class="fas fa-minus"></i></button>                
@@ -57,7 +57,7 @@
             </div>
             <div class="card-body">
               <div id="graph-container" class="chart">
-                <canvas id="barChart" style="height:230px"></canvas>
+                <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
               </div>
             </div>
             <!-- /.box-body -->
@@ -87,14 +87,16 @@
 
         $('#search-form').on('submit', function(e) {
                e.preventDefault();                
-              if($('input:checkbox[name=excel]:checked').val()!=1){
+               oTable.draw();
+              /* if($('input:checkbox[name=excel]:checked').val()!=1){
+                  oTable.draw();
                   //cargarGrafica();
                   $('#btnConsultar').attr("disabled", false);
                   e.preventDefault();
               }else{
                     //$('form[name=search-form]').attr('action','{! ! route('reporte.financiero.uno.generar.excel'); !!}');
                     //$("#search-form").unbind('submit').submit();
-              }
+              } */
                 
         });
         $('#excel').on('ifChecked', function(event){
