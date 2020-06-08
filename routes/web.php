@@ -26,6 +26,7 @@ Route::resource('formulario', 'FormularioController')->names('formulario')->para
 Route::resource('users', 'UsersController')->names('users')->parameters(['users'  =>  'users']);//->middleware('role:1|2');
 Route::resource('usuarios', 'UsuariosController')->names('usuarios')->parameters(['usuarios'  =>  'usuarios']);//->middleware('role:1|2');
 Route::get('usuarios/editar/{usuarios}', 'UsuariosController@editar')->name('usuarios.editar');
+Route::resource('sedes', 'SedesController')->names('sedes')->parameters(['sedes'  =>  'sedes'])->middleware('auth');;//->middleware('role:1|2');
 
 
 Route::post('revisar', 'RevisarController@verificar')->name('revisar');
