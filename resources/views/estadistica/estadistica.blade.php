@@ -2,7 +2,7 @@
 @section('title','Formulario COVID-19' )
 @section('titulopag','ESTADISTICAS')
 @section('elcontrolador','Menu')
-@section('laaccion','Estadistica')
+@section('laaccion','Estadistica : '.auth()->user()->ciudad->t_nombre ?? '' )
 @section('content')
 <script src="/plugins/jquery-ui/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="/plugins/jquery-ui/jquery-ui.min.css">
@@ -10,6 +10,11 @@
 <script src="/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <script src="/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.es.js"></script>
 <link rel="stylesheet" href="/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+
+<link rel="stylesheet" href="/plugins/jAlert-master/dist/jAlert.css">
+<script src="/plugins/jAlert-master/dist/jAlert.min.js"></script>
+<script src="/plugins/jAlert-master/dist/jAlert-functions.min.js"></script>
+
 
 <div class="col-md-4">
   <form method="post" id="search-form" name="search-form" data-toggle="validator" class="formulario"         role="form">
@@ -33,6 +38,11 @@
                 <input type="text" value="" size="10"  maxlength="10" class="form-control pull-right" id="fecha_hasta" name="fecha_hasta" placeholder="yyyy-mm-dd" required>
             </div>
         </div>
+        @if (auth()->user()->b_todas==1)
+          <div class="form-group" >
+            <input name="todas" id="todas"  type="checkbox" value="1" class="flat-red pull-right" > Todas las Ciudades
+          </div>
+        @endif        
         <div class="form-group" >
             <input name="excel" id="excel"  type="checkbox" value="1" class="flat-red pull-right" > Generar Excel
         </div>
@@ -56,8 +66,8 @@
               </div>
             </div>
             <div class="card-body">
-              <div id="graph-container" class="chart">
-                <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+              <div id="graph-container-fiebre" class="chart">              
+                  <canvas id="barChartFiebre" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
               </div>
             </div>
             <!-- /.box-body -->
@@ -66,7 +76,10 @@
 </div>
 @endsection
 @section('script-custom')
+<script src="/plugins/chart.js/Chart.min.js"></script>
+<link rel="stylesheet" href="/plugins/chart.js/Chart.min.css">
 <script>
+    var barChart=null;
     $(function () {   
       var today = new Date(); var dd = today.getDate(); var mm = today.getMonth()+1;
       var yyyy = today.getFullYear();
@@ -87,16 +100,7 @@
 
         $('#search-form').on('submit', function(e) {
                e.preventDefault();                
-               oTable.draw();
-              /* if($('input:checkbox[name=excel]:checked').val()!=1){
-                  oTable.draw();
-                  //cargarGrafica();
-                  $('#btnConsultar').attr("disabled", false);
-                  e.preventDefault();
-              }else{
-                    //$('form[name=search-form]').attr('action','{! ! route('reporte.financiero.uno.generar.excel'); !!}');
-                    //$("#search-form").unbind('submit').submit();
-              } */
+               cargarGraficaFiebre();
                 
         });
         $('#excel').on('ifChecked', function(event){
@@ -108,11 +112,93 @@
             document.location.href="{!! route('estadistica'); !!}";
         });
         if($('input[name=fecha_desde]').val()!='' && $('input[name=fecha_hasta]').val()!=''){
-            //cargarGrafica();
+            cargarGraficaFiebre();
         }else{
-            //grafica( ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],[0, 0, 0, 0, 0, 0]);
+            grafica( [0],[0]);
         }
       
     });
+    function cargarGraficaFiebre() {
+            var cantidadSi = []; var cantidadNo = [];
+            $.ajax({
+                url : '{{ route('estadistica.fiebre.grafico.ajax') }}',
+                data : {'_token': $('input[name=_token]').val(),
+                        'fecha_desde': $('input[name=fecha_desde]').val(),
+                        'fecha_hasta': $('input[name=fecha_hasta]').val(), 
+                        'todas':$('input:checkbox[name=todas]:checked').val(),
+                       },
+                type : 'GET', dataType : 'json',
+                success : function(response) {
+                    response.forEach(function(obj) {
+                            cantidadSi.push(obj.si);
+                            cantidadNo.push(obj.no);
+                    });
+                },
+                error : function(xhr, status) {
+                    errorAlert('Error','Disculpe, existió un problema');
+                },
+                complete : function(xhr, status) {
+                    graficaFiebre(cantidadSi,cantidadNo);
+                }
+            });
+
+    }
+
+    function graficaFiebre(arraySi,arrayNo) {
+        if(barChart!=null){
+             resetCanvas();
+        }
+        var areaChartData = {
+          labels  : ['Fiebre'],
+          datasets: [
+            {
+              label: 'Si', 
+              backgroundColor: 'rgba(60,141,188,0.9)',
+              borderColor: 'rgba(60,141,188,0.8)',
+              pointRadius: false,
+              pointColor: '#3b8bba',
+              pointStrokeColor: 'rgba(60,141,188,1)',
+              pointHighlightFill: '#fff',
+              pointHighlightStroke: 'rgba(60,141,188,1)',
+              data: arraySi,
+            },
+            {
+              label: 'No',backgroundColor: 'rgba(210, 214, 222, 1)',borderColor: 'rgba(210, 214, 222, 1)',pointRadius: false,pointColor: 'rgba(210, 214, 222, 1)',
+              pointStrokeColor: '#c1c7d1',pointHighlightFill  : '#fff',pointHighlightStroke: 'rgba(220,220,220,1)',data: arrayNo
+            },
+          ]
+        }
+        var barChartCanvas = $('#barChartFiebre').get(0).getContext('2d');
+        var barChartData = jQuery.extend(true, {}, areaChartData);
+        var temp0 = areaChartData.datasets[0]
+        var temp1 = areaChartData.datasets[1]
+        barChartData.datasets[0] = temp1
+        barChartData.datasets[1] = temp0
+        var barChartOptions = {
+          responsive              : true,
+          maintainAspectRatio     : false,
+          datasetFill             : false,
+          scales: {yAxes: [{ ticks: {beginAtZero: true,stepSize: 1,}}]}
+        }
+        var barChart = new Chart(barChartCanvas, {
+                        type: 'bar', 
+                        data: barChartData
+                        ,options: barChartOptions
+                      })
+
+    }
+    var resetCanvas = function(){
+          $('#barChartFiebre').remove(); // this is my <canvas> element
+          $('#graph-container-fiebre').append('<canvas id="barChartFiebre" style="height:230px" ><canvas>');
+          canvas = document.querySelector('#barChartFiebre');
+          ctx = canvas.getContext('2d');
+          /* ctx.canvas.width = $('#graph').width(); // resize to parent width
+          ctx.canvas.height = $('#graph').height(); // resize to parent height
+          var x = canvas.width/2;
+          var y = canvas.height/2;
+          ctx.font = '10pt Verdana';
+          ctx.textAlign = 'center';
+          ctx.fillText('This text is centered on the canvas', x, y); */
+        };
   </script>
 @endsection
