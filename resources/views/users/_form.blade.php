@@ -157,7 +157,7 @@
                                                 selected="selected"
                                             @endif
                                                 
-                                                >{{ $sede->t_sede }}</option> 
+                                                >{{ $sede->t_sede }} ({{ $sede->ciudad->t_nombre }})</option> 
                                         @endforeach
                                         </select>
     

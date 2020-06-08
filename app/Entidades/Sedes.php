@@ -8,7 +8,7 @@ class Sedes extends Model
 {
     protected $primaryKey = 'n_idsede';
 
-    protected $fillable= ['t_sede'];
+    protected $fillable= ['t_sede','n_idciudad'];
 
     protected $guarded= ['n_idsede'];
     //
@@ -25,5 +25,10 @@ class Sedes extends Model
     public function usuario()
     {
         return $this->hasMany('App\User','n_idusuario');
+    }
+
+    public function ciudad()
+	{
+		 return $this->belongsTo('App\Entidades\Ciudad','n_idciudad');
     }
 }

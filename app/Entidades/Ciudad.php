@@ -12,5 +12,10 @@ class Ciudad extends Model
     const UPDATED_AT = 'dt_updated_at';
 
     protected $fillable = ['t_nombre','b_habilitado'];
+
+    public function sede()
+    {
+        return $this->hasMany('App\Entidades\Sedes','n_id');
+    }
     
 }
