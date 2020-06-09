@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\SaveFormularioRequest;
 use DB;
 use Auth;
+use DataTables;
 
 class ReportesController extends Controller
 {
@@ -36,6 +37,7 @@ class ReportesController extends Controller
       $fechahoy=date('Y-m-d 00:00:00');
 
       $fecha_desde='1900-12-31';
+      
       if(request('fecha_desde')!=null){
           $fecha_desde=request('fecha_desde');
       }
@@ -53,13 +55,14 @@ class ReportesController extends Controller
         $elselect .= " and fo.n_semaforo>1";
         $elselect .= " and us.n_idusuario=fo.n_idusuario";
         $elselect .= " and se.n_idsede= fo.n_idsede";
-        $elselect .= " and se.n_idciudad=2";
+        $elselect .= " and se.n_idciudad>0";
 
         $query = DB::select($elselect,['fecha_desde' => $fecha_desde,'fecha_hasta' => $fecha_hasta]);
 
-        //dd($query);
+        //dd($elselect);
       
-        return datatables()->of($query)
+        //return datatables()->of($query)
+        return Datatables::of($query)
         /*
         ->addColumn('action', function ($registro) {
             if ($registro->activo=="SI")return '<a href="'.route('formulario.updateinac', $registro->n_idformulario).'"> Inactivar</a>';
