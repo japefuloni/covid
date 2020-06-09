@@ -31,7 +31,7 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-            <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+            <table id="example1" class="table display responsive nowrap datatable" role="grid" aria-describedby="example1_info">
                     <thead>
                     <tr role="row">                        
                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Activo: activate to sort column ascending" style="width: 50px;">Activo</th>
@@ -39,7 +39,21 @@
                   
                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Usuario: activate to sort column ascending" style="width: 176px;">Usuario</th>
                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Resultado: activate to sort column ascending" style="width: 176px;">Resultado</th>
-                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Ingreso: activate to sort column ascending" style="width: 176px;">Ingresó</th>
+                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Ingreso: activate to sort column ascending" style="width: 176px;">Aprobado Ingreso</th>
+                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Resultado: activate to sort column ascending" style="width: 176px;">Consent.</th>
+                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Ingreso: activate to sort column ascending" style="width: 176px;">Irá Hoy</th>
+                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sitios: activate to sort column ascending" style="width: 176px;">Sitios</th>
+                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sitios: activate to sort column ascending" style="width: 176px;">Actividades</th>
+                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sitios: activate to sort column ascending" style="width: 176px;">Fiebre</th>
+                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sitios: activate to sort column ascending" style="width: 176px;">Dolor Garganta</th>
+                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sitios: activate to sort column ascending" style="width: 176px;">Malestar General</th>
+                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sitios: activate to sort column ascending" style="width: 176px;">Secresión Nasal</th>
+                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sitios: activate to sort column ascending" style="width: 176px;">Dificultad Respirar</th>
+                       
+                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sitios: activate to sort column ascending" style="width: 176px;">Tos Seca</th>
+                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sitios: activate to sort column ascending" style="width: 176px;">Contacto Personas Infectadas</th>
+                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sitios: activate to sort column ascending" style="width: 176px;">Fecha Último Contacto</th>
+                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sitios: activate to sort column ascending" style="width: 176px;">Realizó Viaje</th>
                     </tr>
                     </thead>
                     <tbody></tbody>
@@ -54,10 +68,10 @@
 <script>
   var otable=null;
   $(document).ready(function() {
-      $("#menuInactivar" ).addClass("active" );
+      $("#menuReporte1" ).addClass("active" );
       otable=$('#example1').DataTable({
-        'paging' : false,'ordering': false,
-          "searching": false,"processing": true,"serverSide": true,"info": false,
+        'paging' : true,'ordering': true,
+          "searching": true,"processing": false,"serverSide": true,"info": false,
           "language": { "url": "/bower_components/datatables.net/locale/Spanish.json"},
           "ajax": {
                   url: '{!! route('reporteador1'); !!}',
@@ -66,7 +80,28 @@
                       d.fecha_hasta = $('input[name=fecha_hasta]').val();
                   }
               },
-          "columns": [{data: 'activo' },{data: 'updated_at' },{data: 'nombrec' },{data: 'semaforo' },{data: 'ingreso' }],
+          "columns": [
+            {data: 'activo' },
+            {data: 'fechacreated' },
+            {data: 'nombrec' },
+            {data: 'semaforo' },
+            {data: 'ingreso' },
+            {data: 't_consentimiento' },
+            {data: 't_irahoy' },
+            {data: 't_sitios' },
+            {data: 't_actividades' },
+            {data: 't_presentadofiebre' },
+            {data: 't_dolorgarganta' },
+            {data: 't_malestargeneral' },
+            {data: 't_secresioncongestionnasal' },
+            {data: 't_dificultadrespirar' },
+            {data: 't_tosseca' },
+            {data: 't_contactopersonasinfectadas' },
+            {data: 'd_ultimocontacto' },
+            {data: 't_realizoviaje' },
+
+
+            ],
           "language": { "url": "/plugins/datatables/locale/Spanish.json",},
           dom: 'lfBrtip',
           "order": [[ 0, "desc" ]],		
@@ -74,25 +109,27 @@
             {
                  extend: 'copy',
                  exportOptions: {
-                 columns: [  0, 1, 2, 3, 4 ] //Your Colume value those you want
+                 columns: [  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 ] //Your Colume value those you want
                      }
                    },
                   {
                  extend: 'print',
+                 orientation: 'landscape',
                  exportOptions: {
-                 columns: [ 0, 1, 2, 3, 4 ] //Your Colume value those you want
+                 columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 ] //Your Colume value those you want
                      }
                    },
                    {
                     extend: 'excel',
                     exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4 ] //Your Colume value those you want
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 ] //Your Colume value those you want
                    }
                  },
                  {
                     extend: 'pdf',
+                    orientation: 'landscape',
                     exportOptions: {
-                    columns: [  0 , 1, 2, 3, 4 ] //Your Colume value those you want
+                    columns: [  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 ] //Your Colume value those you want
                    }
                  },
                ],

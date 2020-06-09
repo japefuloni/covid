@@ -34,6 +34,7 @@ class ReportesController extends Controller
     public function getReporte1Formularios()
     {
       $id_ciudad=auth()->user()->n_idciudad;
+      $todas=auth()->user()->b_todas;
       $fechahoy=date('Y-m-d 00:00:00');
 
       $fecha_desde='1900-12-31';
@@ -45,17 +46,23 @@ class ReportesController extends Controller
       if(request('fecha_hasta')!=null){
           $fecha_hasta=request('fecha_hasta');
       }
+      $fecha_desde=$fecha_desde.' 00:00:00';
+      $fecha_hasta=$fecha_hasta.' 23:59:59';
 
-
+      //dd($fecha_hasta);
         $elselect= "SELECT * ";
         $elselect .= " ,CONCAT('(',us.c_codtipo,' ',us.t_documento,') ',us.t_nombres,' ',us.t_apellidos) as nombrec, fo.t_activo as activo";
+        $elselect .= " ,fo.created_at as fechacreated, fo.updated_at as fechaupdate";
         $elselect .= " FROM covidform.formulario fo, users us, sedes se";
         $elselect .= " where fo.created_at >=:fecha_desde";
         $elselect .= " and fo.created_at <= :fecha_hasta";
         $elselect .= " and fo.n_semaforo>1";
         $elselect .= " and us.n_idusuario=fo.n_idusuario";
-        $elselect .= " and se.n_idsede= fo.n_idsede";
-        $elselect .= " and se.n_idciudad>0";
+        $elselect .= " and se.n_idsede= fo.n_idsede"; 
+        if ($todas=="1")$elselect .= " and se.n_idciudad>0";
+        else $elselect .= " and se.n_idciudad=".$id_ciudad;
+
+        //dd($elselect);
 
         $query = DB::select($elselect,['fecha_desde' => $fecha_desde,'fecha_hasta' => $fecha_hasta]);
 

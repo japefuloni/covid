@@ -158,8 +158,8 @@ use App\Entidades\Menus;
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{ route('reportes.reporte1') }}" class="nav-link">
-                <i class="far fa-circle text-info nav-icon"></i><p>Reporte 1</p>
+              <a id="menuReporte1" href="{{ route('reportes.reporte1') }}" class="nav-link">
+                <i class="far fa-circle text-info nav-icon"></i><p>Críticos x Periodo</p>
               </a>
             </li>
             <li class="nav-item">
