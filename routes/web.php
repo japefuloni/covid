@@ -33,6 +33,8 @@ Route::resource('sedes', 'SedesController')->names('sedes')->parameters(['sedes'
 
 Route::post('revisar', 'RevisarController@verificar')->name('revisar');
 
+Route::get('reportes/reporte1', 'ReportesController@index')->name('reportes.reporte1')->middleware('auth');
+
 
 /* Route::get('losusuarios', function(){
     return datatables()
@@ -49,6 +51,7 @@ Route::post('revisar', 'RevisarController@verificar')->name('revisar');
 }); */
 Route::get('losusuarios', 'UsuariosController@getListaUsuarios')->name('losusuarios');
 Route::get('losformularios', 'FormularioController@getListaFormularios')->name('losformularios');
+Route::get('reporteador1', 'ReportesController@getReporte1Formularios')->name('reporteador1');
 
 
 Auth::routes();
