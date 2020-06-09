@@ -6,6 +6,10 @@
 @section('laaccion','Perfil')
 @section('content')
 @include('partials.validation-errors')
+{{-- /**
+ * Javier Mantilla. javier.mantillap@upb.edu.co
+ * 2020-06
+ */ --}}
 <form role="form" id="frmPerfil" method="post" action="{{ route('perfil.guardar') }}"  >
                 {{ csrf_field() }}
 <div class="col-md-6">

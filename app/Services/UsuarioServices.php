@@ -2,7 +2,10 @@
 namespace App\Services;
 use App\Entidades\Administrador;
 use DB;
-
+/**
+ * Javier Mantilla. javier.mantillap@upb.edu.co
+ * 2020-06
+ */
 class UsuarioServices {
 
     public function __construct()  {        

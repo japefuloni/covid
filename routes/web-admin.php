@@ -1,4 +1,8 @@
 <?php
+/**
+ * Javier Mantilla. javier.mantillap@upb.edu.co
+ * 2020-06
+ */
 Route::get('/clear','ConfiguracionController@clear')->name('clear');
 
 ##logins

@@ -6,6 +6,10 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * Javier Mantilla. javier.mantillap@upb.edu.co
+ * 2020-06
+ */
 class Administrador extends Authenticatable
 {
     use Notifiable;

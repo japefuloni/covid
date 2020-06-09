@@ -4,6 +4,10 @@
 @section('elcontrolador','Menu')
 @section('laaccion','Administradores')
 @section('content')
+{{-- /**
+ * Javier Mantilla. javier.mantillap@upb.edu.co
+ * 2020-06
+ */ --}}
 <div class="row">
     <div class="col-xs-12">
         <form action="{{ route('administrador.listar.nuevo') }}" method="get">

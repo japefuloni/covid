@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Artisan;
-
+/**
+ * Javier Mantilla. javier.mantillap@upb.edu.co
+ * 2020-06
+ */
 class ConfiguracionController extends Controller
 {
     public function clear()

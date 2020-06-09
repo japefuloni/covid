@@ -4,6 +4,10 @@
 @section('elcontrolador','Menu')
 @section('laaccion','Estadistica : '.auth()->user()->ciudad->t_nombre ?? '' )
 @section('content')
+{{-- /**
+ * Javier Mantilla. javier.mantillap@upb.edu.co
+ * 2020-06
+ */ --}}
 <script src="/plugins/jquery-ui/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="/plugins/jquery-ui/jquery-ui.min.css">
 <!-- datepicker -->

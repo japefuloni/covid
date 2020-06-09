@@ -5,6 +5,10 @@
 @section('laaccion','Administradores')
 @section('content')
 @include('partials.validation-errors')
+{{-- /**
+ * Javier Mantilla. javier.mantillap@upb.edu.co
+ * 2020-06
+ */ --}}
 <div class="col-md-6">
     <form class="formulario1" role="form" id="frmAdministrador"  method="post" action="{{ route('administrador.guardar') }}"    >    
         {{ csrf_field() }}

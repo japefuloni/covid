@@ -4,6 +4,10 @@
 @section('elcontrolador','login')
 @section('laaccion','Login de Usuario')
 @section('content')
+{{-- /**
+ * Javier Mantilla. javier.mantillap@upb.edu.co
+ * 2020-06
+ */ --}}
 <style>
     .btn-primary:hover {
         color: #fff;

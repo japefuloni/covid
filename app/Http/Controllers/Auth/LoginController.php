@@ -7,6 +7,10 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Entidades\AuditoriaIngreso;
 use Auth;
 
+/**
+ * Javier Mantilla. javier.mantillap@upb.edu.co
+ * 2020-06
+ */
 class LoginController extends Controller
 {
    

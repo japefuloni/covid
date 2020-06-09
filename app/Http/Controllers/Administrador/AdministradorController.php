@@ -13,7 +13,10 @@ use DB;
 use Log;
 use Exception;
 
-
+/**
+ * Javier Mantilla. javier.mantillap@upb.edu.co
+ * 2020-06
+ */
 class AdministradorController extends Controller
 {
     private $administrador;

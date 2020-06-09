@@ -9,7 +9,10 @@ use Session;
 use Validator;
 use App\Services\UsuarioServices;
 
-
+/**
+ * Javier Mantilla. javier.mantillap@upb.edu.co
+ * 2020-06
+ */
 class PerfilController extends Controller
 {
     public function __construct()  {

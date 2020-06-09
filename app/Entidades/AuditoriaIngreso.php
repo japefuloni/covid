@@ -3,7 +3,10 @@
 namespace App\Entidades;
 
 use Illuminate\Database\Eloquent\Model;
-
+/**
+ * Javier Mantilla. javier.mantillap@upb.edu.co
+ * 2020-06
+ */
 class AuditoriaIngreso extends Model
 {
     protected $table = 'auditoria_ingreso';

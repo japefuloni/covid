@@ -8,6 +8,10 @@ use App\Entidades\Administrador;
 use Auth;
 use Session;
 
+/**
+ * Javier Mantilla. javier.mantillap@upb.edu.co
+ * 2020-06
+ */
 class ListarAdministradorController extends Controller
 {
     /**

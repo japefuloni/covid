@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Estadistica;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
-
+/**
+ * Javier Mantilla. javier.mantillap@upb.edu.co
+ * 2020-06
+ */
 class EstadisticaController extends Controller
 {
 
