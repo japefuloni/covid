@@ -93,14 +93,130 @@
           </div>
     </div>
   </section> 
+  <section class="col-lg-4 connectedSortable">
+    <div class="">
+        <div class="card card-secondary">
+            <div class="card-header with-border">
+              <h3 class="card-title">{{ Config::get('pregunta.viaje') }}</h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool btn-sm" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <i class="fas fa-minus"></i></button>                
+              </div>
+            </div>
+            <div class="card-body">
+              <div id="graph-container-viaje" class="chart">              
+                  <canvas id="barChartViaje" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+    </div>
+  </section> 
+  <section class="col-lg-4 connectedSortable">
+    <div class="">
+        <div class="card card-olive">
+            <div class="card-header with-border">
+              <h3 class="card-title">{{ Config::get('pregunta.garganta') }}</h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool btn-sm" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <i class="fas fa-minus"></i></button>                
+              </div>
+            </div>
+            <div class="card-body">
+              <div id="graph-container-garganta" class="chart">              
+                  <canvas id="barChartGarganta" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+    </div>
+  </section> 
+  <section class="col-lg-4 connectedSortable">
+    <div class="">
+        <div class="card card-lightblue">
+            <div class="card-header with-border">
+              <h3 class="card-title">{{ Config::get('pregunta.malestar') }}</h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool btn-sm" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <i class="fas fa-minus"></i></button>                
+              </div>
+            </div>
+            <div class="card-body">
+              <div id="graph-container-malestar" class="chart">              
+                  <canvas id="barChartMalestar" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+    </div>
+  </section> 
+  <section class="col-lg-4 connectedSortable">
+    <div class="">
+        <div class="card card-orange">
+            <div class="card-header with-border">
+              <h3 class="card-title">{{ Config::get('pregunta.respirar') }}</h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool btn-sm" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <i class="fas fa-minus"></i></button>                
+              </div>
+            </div>
+            <div class="card-body">
+              <div id="graph-container-respirar" class="chart">              
+                  <canvas id="barChartRespirar" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+    </div>
+  </section>
+  <section class="col-lg-4 connectedSortable">
+    <div class="">
+        <div class="card card-purple">
+            <div class="card-header with-border">
+              <h3 class="card-title">{{ Config::get('pregunta.tos') }}</h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool btn-sm" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <i class="fas fa-minus"></i></button>                
+              </div>
+            </div>
+            <div class="card-body">
+              <div id="graph-container-tos" class="chart">              
+                  <canvas id="barChartTos" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+    </div>
+  </section>
+  <section class="col-lg-8 connectedSortable">
+    <div class="">
+        <div class="card card-success">
+            <div class="card-header with-border">
+              <h3 class="card-title">{{ Config::get('pregunta.contacto') }}</h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool btn-sm" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <i class="fas fa-minus"></i></button>                
+              </div>
+            </div>
+            <div class="card-body">
+              <div id="graph-container-contacto" class="chart">              
+                  <canvas id="barChartContacto" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+    </div>
+  </section> 
 </div>
 @endsection
 @section('script-custom')
 <script src="/plugins/chart.js/Chart.min.js"></script>
 <link rel="stylesheet" href="/plugins/chart.js/Chart.min.css">
 <script>
-    var barChartFiebre=null;
-    var barChartSecrecion=null;
+    var barChartFiebre=null; var barChartSecrecion=null; var barChartViaje=null;
+    var barChartGarganta=null;    var barChartMalestar=null;
+    var barChartRespirar=null;    var barChartTos=null;
+    var barChartContacto=null;
     $(function () {   
       var today = new Date(); var dd = today.getDate(); var mm = today.getMonth()+1; var yyyy = today.getFullYear();
       if(dd<10){ dd='0'+dd; }
@@ -120,9 +236,9 @@
 
         $('#search-form').on('submit', function(e) {
                e.preventDefault();                
-               cargarDatosGraficaFiebre();
-               cargarDatosGraficaSecrecion();
-                
+               cargarDatosGraficaFiebre(); cargarDatosGraficaSecrecion(); cargarDatosGraficaViaje();
+               cargarDatosGraficaGarganta(); cargarDatosGraficaMalestar(); cargarDatosGraficaRespirar();
+               cargarDatosGraficaTos(); cargarDatosGraficaContacto();
         });
         $('#excel').on('ifChecked', function(event){
              $("#btnConsultar").text("Generar Excel");
@@ -133,11 +249,14 @@
             document.location.href="{!! route('estadistica'); !!}";
         });
         if($('input[name=fecha_desde]').val()!='' && $('input[name=fecha_hasta]').val()!=''){
-            cargarDatosGraficaFiebre();            
-            cargarDatosGraficaSecrecion();
+            cargarDatosGraficaFiebre(); cargarDatosGraficaSecrecion(); cargarDatosGraficaViaje();
+            cargarDatosGraficaGarganta(); cargarDatosGraficaMalestar(); cargarDatosGraficaRespirar();
+            cargarDatosGraficaTos(); cargarDatosGraficaContacto();
         }else{
-            graficaBarChart("#barChartFiebre",['N/A'], [0],[0]);
-            graficaBarChart("#barChartSecrecion",['N/A'], [0],[0]);
+            graficaBarChart("#barChartFiebre",['N/A'], [0],[0]);            graficaBarChart("#barChartSecrecion",['N/A'], [0],[0]);
+            graficaBarChart("#barChartViaje",['N/A'], [0],[0]);            graficaBarChart("#barChartGarganta",['N/A'], [0],[0]);
+            graficaBarChart("#barChartMalestar",['N/A'], [0],[0]); graficaBarChart("#barChartRespirar",['N/A'], [0],[0]);
+            graficaBarChart("#barChartTos",['N/A'], [0],[0]); graficaBarChart("#barChartContacto",['N/A'], [0],[0]);
         }
       
     });
@@ -182,8 +301,136 @@
                 },
                 error : function(xhr, status) { errorAlert('Error','Disculpe, existió un problema'); },
                 complete : function(xhr, status) {
-                   if(barChartFiebre!=null){ resetCanvas('barChartSecrecion','#graph-container-secrecion'); }  
+                   if(barChartSecrecion!=null){ resetCanvas('barChartSecrecion','#graph-container-secrecion'); }  
                    graficaBarChart("#barChartSecrecion",ciudad,cantidadSi,cantidadNo);
+                }
+            });
+    }
+
+    function  cargarDatosGraficaViaje(){
+            var cantidadSi = []; var cantidadNo = [];var ciudad=[];
+            $.ajax({
+                url : '{{ route('estadistica.viaje.grafico.ajax') }}',
+                data : {'_token': $('input[name=_token]').val(),'fecha_desde': $('input[name=fecha_desde]').val(), 
+                         'fecha_hasta': $('input[name=fecha_hasta]').val(),'todas':$('input:checkbox[name=todas]:checked').val(),
+                       },
+                type : 'GET', dataType : 'json',
+                success : function(response) {
+                    response.forEach(function(obj) {
+                            ciudad.push(obj.ciudad);
+                            cantidadSi.push(obj.si);
+                            cantidadNo.push(obj.no);
+                    });
+                },
+                error : function(xhr, status) { errorAlert('Error','Disculpe, existió un problema'); },
+                complete : function(xhr, status) {
+                   if(barChartViaje!=null){ resetCanvas('barChartViaje','#graph-container-viaje'); }  
+                   graficaBarChart("#barChartViaje",ciudad,cantidadSi,cantidadNo);
+                }
+            });
+    }
+
+    function  cargarDatosGraficaGarganta(){
+            var cantidadSi = []; var cantidadNo = [];var ciudad=[];
+            $.ajax({
+                url : '{{ route('estadistica.garganta.grafico.ajax') }}',
+                data : {'_token': $('input[name=_token]').val(),'fecha_desde': $('input[name=fecha_desde]').val(), 
+                         'fecha_hasta': $('input[name=fecha_hasta]').val(),'todas':$('input:checkbox[name=todas]:checked').val(),
+                       },
+                type : 'GET', dataType : 'json',
+                success : function(response) {
+                    response.forEach(function(obj) {
+                            ciudad.push(obj.ciudad);  cantidadSi.push(obj.si); cantidadNo.push(obj.no);
+                    });
+                },
+                error : function(xhr, status) { errorAlert('Error','Disculpe, existió un problema'); },
+                complete : function(xhr, status) {
+                   if(barChartGarganta!=null){ resetCanvas('barChartGarganta','#graph-container-garganta'); }  
+                   graficaBarChart("#barChartGarganta",ciudad,cantidadSi,cantidadNo);
+                }
+            });
+    }
+
+    function  cargarDatosGraficaMalestar(){
+            var cantidadSi = []; var cantidadNo = [];var ciudad=[];
+            $.ajax({
+                url : '{{ route('estadistica.malestar.grafico.ajax') }}',
+                data : {'_token': $('input[name=_token]').val(),'fecha_desde': $('input[name=fecha_desde]').val(), 
+                         'fecha_hasta': $('input[name=fecha_hasta]').val(),'todas':$('input:checkbox[name=todas]:checked').val(),
+                       },
+                type : 'GET', dataType : 'json',
+                success : function(response) {
+                    response.forEach(function(obj) {
+                            ciudad.push(obj.ciudad);  cantidadSi.push(obj.si); cantidadNo.push(obj.no);
+                    });
+                },
+                error : function(xhr, status) { errorAlert('Error','Disculpe, existió un problema'); },
+                complete : function(xhr, status) {
+                   if(barChartMalestar!=null){ resetCanvas('barChartMalestar','#graph-container-malestar'); }  
+                   graficaBarChart("#barChartMalestar",ciudad,cantidadSi,cantidadNo);
+                }
+            });
+    }
+
+    function  cargarDatosGraficaRespirar(){
+            var cantidadSi = []; var cantidadNo = [];var ciudad=[];
+            $.ajax({
+                url : '{{ route('estadistica.respirar.grafico.ajax') }}',
+                data : {'_token': $('input[name=_token]').val(),'fecha_desde': $('input[name=fecha_desde]').val(), 
+                         'fecha_hasta': $('input[name=fecha_hasta]').val(),'todas':$('input:checkbox[name=todas]:checked').val(),
+                       },
+                type : 'GET', dataType : 'json',
+                success : function(response) {
+                    response.forEach(function(obj) {
+                            ciudad.push(obj.ciudad);  cantidadSi.push(obj.si); cantidadNo.push(obj.no);
+                    });
+                },
+                error : function(xhr, status) { errorAlert('Error','Disculpe, existió un problema'); },
+                complete : function(xhr, status) {
+                   if(barChartRespirar!=null){ resetCanvas('barChartRespirar','#graph-container-respirar'); }  
+                   graficaBarChart("#barChartRespirar",ciudad,cantidadSi,cantidadNo);
+                }
+            });
+    }
+
+    function  cargarDatosGraficaTos(){
+            var cantidadSi = []; var cantidadNo = [];var ciudad=[];
+            $.ajax({
+                url : '{{ route('estadistica.tos.grafico.ajax') }}',
+                data : {'_token': $('input[name=_token]').val(),'fecha_desde': $('input[name=fecha_desde]').val(), 
+                         'fecha_hasta': $('input[name=fecha_hasta]').val(),'todas':$('input:checkbox[name=todas]:checked').val(),
+                       },
+                type : 'GET', dataType : 'json',
+                success : function(response) {
+                    response.forEach(function(obj) {
+                            ciudad.push(obj.ciudad);  cantidadSi.push(obj.si); cantidadNo.push(obj.no);
+                    });
+                },
+                error : function(xhr, status) { errorAlert('Error','Disculpe, existió un problema'); },
+                complete : function(xhr, status) {
+                   if(barChartTos!=null){ resetCanvas('barChartTos','#graph-container-tos'); }  
+                   graficaBarChart("#barChartTos",ciudad,cantidadSi,cantidadNo);
+                }
+            });
+    }
+
+    function  cargarDatosGraficaContacto(){
+            var cantidadSi = []; var cantidadNo = [];var ciudad=[];
+            $.ajax({
+                url : '{{ route('estadistica.contacto.grafico.ajax') }}',
+                data : {'_token': $('input[name=_token]').val(),'fecha_desde': $('input[name=fecha_desde]').val(), 
+                         'fecha_hasta': $('input[name=fecha_hasta]').val(),'todas':$('input:checkbox[name=todas]:checked').val(),
+                       },
+                type : 'GET', dataType : 'json',
+                success : function(response) {
+                    response.forEach(function(obj) {
+                            ciudad.push(obj.ciudad);  cantidadSi.push(obj.si); cantidadNo.push(obj.no);
+                    });
+                },
+                error : function(xhr, status) { errorAlert('Error','Disculpe, existió un problema'); },
+                complete : function(xhr, status) {
+                   if(barChartContacto!=null){ resetCanvas('barChartContacto','#graph-container-contacto'); }  
+                   graficaBarChart("#barChartContacto",ciudad,cantidadSi,cantidadNo);
                 }
             });
     }
@@ -212,8 +459,15 @@
           responsive              : true,maintainAspectRatio     : false, datasetFill             : false,
           scales: {yAxes: [{ ticks: {beginAtZero: true,stepSize: 1,}}]}
         };
-        barChartFiebre = new Chart(barChartCanvas, { type: 'bar', data: barChartData,options: barChartOptions });
-
+        if(nombreGrafica=="#barChartFiebre"){  barChartFiebre = new Chart(barChartCanvas, { type: 'bar', data: barChartData,options: barChartOptions }); }
+        if(nombreGrafica=="#barChartSecrecion"){  barChartSecrecion = new Chart(barChartCanvas, { type: 'bar', data: barChartData,options: barChartOptions }); }
+        if(nombreGrafica=="#barChartViaje"){  barChartViaje = new Chart(barChartCanvas, { type: 'bar', data: barChartData,options: barChartOptions }); }
+        if(nombreGrafica=="#barChartGarganta"){  barChartGarganta = new Chart(barChartCanvas, { type: 'bar', data: barChartData,options: barChartOptions }); }
+        if(nombreGrafica=="#barChartMalestar"){  barChartMalestar = new Chart(barChartCanvas, { type: 'bar', data: barChartData,options: barChartOptions }); }
+        if(nombreGrafica=="#barChartRespirar"){  barChartRespirar = new Chart(barChartCanvas, { type: 'bar', data: barChartData,options: barChartOptions }); }
+        if(nombreGrafica=="#barChartTos"){  barChartTos = new Chart(barChartCanvas, { type: 'bar', data: barChartData,options: barChartOptions }); }
+        if(nombreGrafica=="#barChartContacto"){  barChartContacto = new Chart(barChartCanvas, { type: 'bar', data: barChartData,options: barChartOptions }); }
+               
     }
     var resetCanvas = function(nombreGrafica,nombreContenedor){
           $('#'+nombreGrafica).remove(); // this is my <canvas> element

@@ -23,3 +23,9 @@ Route::post('/perfil/actualizar','Administrador\PerfilController@envioGuardarPer
 Route::get('/estadistica','Estadistica\EstadisticaController@index')->name('estadistica');
 Route::get('/estadistica/fiebre/grafico/ajax','Estadistica\EstadisticaController@getDatosGraficaFiebreAjax')->name('estadistica.fiebre.grafico.ajax')->middleware('auth');
 Route::get('/estadistica/secrecion/grafico/ajax','Estadistica\EstadisticaController@getDatosGraficaSecrecionAjax')->name('estadistica.secrecion.grafico.ajax')->middleware('auth');
+Route::get('/estadistica/viaje/grafico/ajax','Estadistica\EstadisticaController@getDatosGraficaViajeAjax')->name('estadistica.viaje.grafico.ajax')->middleware('auth');
+Route::get('/estadistica/garganta/grafico/ajax','Estadistica\EstadisticaController@getDatosGraficaGargantaAjax')->name('estadistica.garganta.grafico.ajax')->middleware('auth');
+Route::get('/estadistica/malestar/grafico/ajax','Estadistica\EstadisticaController@getDatosGraficaMalestarAjax')->name('estadistica.malestar.grafico.ajax')->middleware('auth');
+Route::get('/estadistica/respirar/grafico/ajax','Estadistica\EstadisticaController@getDatosGraficaRepirarAjax')->name('estadistica.respirar.grafico.ajax')->middleware('auth');
+Route::get('/estadistica/tos/grafico/ajax','Estadistica\EstadisticaController@getDatosGraficaTosAjax')->name('estadistica.tos.grafico.ajax')->middleware('auth');
+Route::get('/estadistica/contacto/grafico/ajax','Estadistica\EstadisticaController@getDatosGraficaContactoAjax')->name('estadistica.contacto.grafico.ajax')->middleware('auth');
