@@ -55,7 +55,7 @@
   </form>      
 </div>
 <div class="row">
-  <section class="col-lg-3 connectedSortable">
+  <section class="col-lg-4 connectedSortable">
     <div class="">
         <div class="card card-info">
             <div class="card-header with-border">
@@ -73,16 +73,36 @@
             <!-- /.box-body -->
           </div>
     </div>
+  </section>  
+  <section class="col-lg-4 connectedSortable">
+    <div class="">
+        <div class="card card-navy">
+            <div class="card-header with-border">
+              <h3 class="card-title">{{ Config::get('pregunta.secrecion') }}</h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool btn-sm" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <i class="fas fa-minus"></i></button>                
+              </div>
+            </div>
+            <div class="card-body">
+              <div id="graph-container-secrecion" class="chart">              
+                  <canvas id="barChartSecrecion" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+    </div>
+  </section> 
 </div>
 @endsection
 @section('script-custom')
 <script src="/plugins/chart.js/Chart.min.js"></script>
 <link rel="stylesheet" href="/plugins/chart.js/Chart.min.css">
 <script>
-    var barChart=null;
+    var barChartFiebre=null;
+    var barChartSecrecion=null;
     $(function () {   
-      var today = new Date(); var dd = today.getDate(); var mm = today.getMonth()+1;
-      var yyyy = today.getFullYear();
+      var today = new Date(); var dd = today.getDate(); var mm = today.getMonth()+1; var yyyy = today.getFullYear();
       if(dd<10){ dd='0'+dd; }
       if(mm<10){mm='0'+mm;}
       today = yyyy+'-'+mm+'-'+dd;
@@ -100,7 +120,8 @@
 
         $('#search-form').on('submit', function(e) {
                e.preventDefault();                
-               cargarGraficaFiebre();
+               cargarDatosGraficaFiebre();
+               cargarDatosGraficaSecrecion();
                 
         });
         $('#excel').on('ifChecked', function(event){
@@ -112,93 +133,160 @@
             document.location.href="{!! route('estadistica'); !!}";
         });
         if($('input[name=fecha_desde]').val()!='' && $('input[name=fecha_hasta]').val()!=''){
-            cargarGraficaFiebre();
+            cargarDatosGraficaFiebre();            
+            cargarDatosGraficaSecrecion();
         }else{
-            grafica( [0],[0]);
+            graficaBarChart("#barChartFiebre",['N/A'], [0],[0]);
+            graficaBarChart("#barChartSecrecion",['N/A'], [0],[0]);
         }
       
     });
-    function cargarGraficaFiebre() {
-            var cantidadSi = []; var cantidadNo = [];
+
+    function cargarDatosGraficaFiebre() {
+            var cantidadSi = []; var cantidadNo = [];var ciudad=[];
             $.ajax({
                 url : '{{ route('estadistica.fiebre.grafico.ajax') }}',
-                data : {'_token': $('input[name=_token]').val(),
-                        'fecha_desde': $('input[name=fecha_desde]').val(),
-                        'fecha_hasta': $('input[name=fecha_hasta]').val(), 
-                        'todas':$('input:checkbox[name=todas]:checked').val(),
+                data : {'_token': $('input[name=_token]').val(),'fecha_desde': $('input[name=fecha_desde]').val(), 
+                         'fecha_hasta': $('input[name=fecha_hasta]').val(),'todas':$('input:checkbox[name=todas]:checked').val(),
                        },
                 type : 'GET', dataType : 'json',
                 success : function(response) {
                     response.forEach(function(obj) {
+                            ciudad.push(obj.ciudad);
                             cantidadSi.push(obj.si);
                             cantidadNo.push(obj.no);
                     });
                 },
-                error : function(xhr, status) {
-                    errorAlert('Error','Disculpe, existió un problema');
-                },
+                error : function(xhr, status) { errorAlert('Error','Disculpe, existió un problema'); },
                 complete : function(xhr, status) {
-                    graficaFiebre(cantidadSi,cantidadNo);
+                   if(barChartFiebre!=null){ resetCanvas('barChartFiebre','#graph-container-fiebre'); }  
+                   graficaBarChart("#barChartFiebre",ciudad,cantidadSi,cantidadNo);
                 }
             });
-
     }
 
-    function graficaFiebre(arraySi,arrayNo) {
-        if(barChart!=null){
-             resetCanvas();
-        }
+    function  cargarDatosGraficaSecrecion(){
+            var cantidadSi = []; var cantidadNo = [];var ciudad=[];
+            $.ajax({
+                url : '{{ route('estadistica.secrecion.grafico.ajax') }}',
+                data : {'_token': $('input[name=_token]').val(),'fecha_desde': $('input[name=fecha_desde]').val(), 
+                         'fecha_hasta': $('input[name=fecha_hasta]').val(),'todas':$('input:checkbox[name=todas]:checked').val(),
+                       },
+                type : 'GET', dataType : 'json',
+                success : function(response) {
+                    response.forEach(function(obj) {
+                            ciudad.push(obj.ciudad);
+                            cantidadSi.push(obj.si);
+                            cantidadNo.push(obj.no);
+                    });
+                },
+                error : function(xhr, status) { errorAlert('Error','Disculpe, existió un problema'); },
+                complete : function(xhr, status) {
+                   if(barChartFiebre!=null){ resetCanvas('barChartSecrecion','#graph-container-secrecion'); }  
+                   graficaBarChart("#barChartSecrecion",ciudad,cantidadSi,cantidadNo);
+                }
+            });
+    }
+
+    function graficaBarChart(nombreGrafica,ciudad,arraySi,arrayNo) {        
         var areaChartData = {
-          labels  : ['Fiebre'],
-          datasets: [
-            {
-              label: 'Si', 
-              backgroundColor: 'rgba(60,141,188,0.9)',
-              borderColor: 'rgba(60,141,188,0.8)',
-              pointRadius: false,
-              pointColor: '#3b8bba',
-              pointStrokeColor: 'rgba(60,141,188,1)',
-              pointHighlightFill: '#fff',
-              pointHighlightStroke: 'rgba(60,141,188,1)',
-              data: arraySi,
-            },
-            {
-              label: 'No',backgroundColor: 'rgba(210, 214, 222, 1)',borderColor: 'rgba(210, 214, 222, 1)',pointRadius: false,pointColor: 'rgba(210, 214, 222, 1)',
-              pointStrokeColor: '#c1c7d1',pointHighlightFill  : '#fff',pointHighlightStroke: 'rgba(220,220,220,1)',data: arrayNo
-            },
-          ]
-        }
-        var barChartCanvas = $('#barChartFiebre').get(0).getContext('2d');
+              labels  :ciudad,
+              datasets: [
+                {
+                  label: 'Si',backgroundColor: 'rgba(60,141,188,0.9)',borderColor: 'rgba(60,141,188,0.8)',pointRadius: false,pointColor: '#3b8bba',
+                  pointStrokeColor: 'rgba(60,141,188,1)',pointHighlightFill: '#fff',pointHighlightStroke: 'rgba(60,141,188,1)',data: arraySi,
+                },
+                {
+                  label: 'No',backgroundColor: 'rgba(210, 214, 222, 1)',borderColor: 'rgba(210, 214, 222, 1)',pointRadius: false,pointColor: 'rgba(210, 214, 222, 1)',
+                  pointStrokeColor: '#c1c7d1',pointHighlightFill  : '#fff',pointHighlightStroke: 'rgba(220,220,220,1)',data: arrayNo
+                },
+              ]
+        };        
+        var barChartCanvas = $(nombreGrafica).get(0).getContext('2d');
         var barChartData = jQuery.extend(true, {}, areaChartData);
-        var temp0 = areaChartData.datasets[0]
-        var temp1 = areaChartData.datasets[1]
-        barChartData.datasets[0] = temp1
-        barChartData.datasets[1] = temp0
+        var temp0 = areaChartData.datasets[0];
+        var temp1 = areaChartData.datasets[1];
+        barChartData.datasets[0] = temp1;
+        barChartData.datasets[1] = temp0;
         var barChartOptions = {
-          responsive              : true,
-          maintainAspectRatio     : false,
-          datasetFill             : false,
+          responsive              : true,maintainAspectRatio     : false, datasetFill             : false,
           scales: {yAxes: [{ ticks: {beginAtZero: true,stepSize: 1,}}]}
-        }
-        var barChart = new Chart(barChartCanvas, {
-                        type: 'bar', 
-                        data: barChartData
-                        ,options: barChartOptions
-                      })
+        };
+        barChartFiebre = new Chart(barChartCanvas, { type: 'bar', data: barChartData,options: barChartOptions });
 
     }
-    var resetCanvas = function(){
-          $('#barChartFiebre').remove(); // this is my <canvas> element
-          $('#graph-container-fiebre').append('<canvas id="barChartFiebre" style="height:230px" ><canvas>');
-          canvas = document.querySelector('#barChartFiebre');
+    var resetCanvas = function(nombreGrafica,nombreContenedor){
+          $('#'+nombreGrafica).remove(); // this is my <canvas> element
+          $(nombreContenedor).append('<canvas id="'+nombreGrafica+'" style="height:230px" ><canvas>');
+          canvas = document.querySelector('#'+nombreGrafica);
           ctx = canvas.getContext('2d');
-          /* ctx.canvas.width = $('#graph').width(); // resize to parent width
+          ctx.canvas.width = $('#graph').width(); // resize to parent width
           ctx.canvas.height = $('#graph').height(); // resize to parent height
           var x = canvas.width/2;
           var y = canvas.height/2;
           ctx.font = '10pt Verdana';
           ctx.textAlign = 'center';
-          ctx.fillText('This text is centered on the canvas', x, y); */
+          ctx.fillText('This text is centered on the canvas', x, y); 
         };
   </script>
 @endsection
+
+{{-- 
+function graficaFiebre(ciudad,arraySi,arrayNo) {
+  var nombreGrafica="#barChartFiebre";
+  if(barChartFiebre!=null){
+      //console.log("Entro a eliminar el canvas anterior");
+      //barChart.clear();
+      resetCanvas();
+  }        
+  var areaChartData = {
+    labels  :ciudad,
+    datasets: [
+      {
+        label: 'Si', 
+        backgroundColor: 'rgba(60,141,188,0.9)',
+        borderColor: 'rgba(60,141,188,0.8)',
+        pointRadius: false,
+        pointColor: '#3b8bba',
+        pointStrokeColor: 'rgba(60,141,188,1)',
+        pointHighlightFill: '#fff',
+        pointHighlightStroke: 'rgba(60,141,188,1)',
+        data: arraySi,
+      },
+      {
+        label: 'No',backgroundColor: 'rgba(210, 214, 222, 1)',borderColor: 'rgba(210, 214, 222, 1)',pointRadius: false,pointColor: 'rgba(210, 214, 222, 1)',
+        pointStrokeColor: '#c1c7d1',pointHighlightFill  : '#fff',pointHighlightStroke: 'rgba(220,220,220,1)',data: arrayNo
+      },
+    ]
+  }
+  //var barChartCanvas = $('#barChartFiebre').get(0).getContext('2d');
+  var barChartCanvas = $(nombreGrafica).get(0).getContext('2d');
+  var barChartData = jQuery.extend(true, {}, areaChartData);
+  var temp0 = areaChartData.datasets[0]
+  var temp1 = areaChartData.datasets[1]
+  barChartData.datasets[0] = temp1
+  barChartData.datasets[1] = temp0
+  var barChartOptions = {
+    responsive              : true,
+    maintainAspectRatio     : false,
+    datasetFill             : false,
+    scales: {yAxes: [{ ticks: {beginAtZero: true,stepSize: 1,}}]}
+  }
+  barChartFiebre = new Chart(barChartCanvas, {
+                  type: 'bar', data: barChartData,options: barChartOptions
+                })
+
+}
+var resetCanvas = function(){
+    $('#barChartFiebre').remove(); // this is my <canvas> element
+    $('#graph-container-fiebre').append('<canvas id="barChartFiebre" style="height:230px" ><canvas>');
+    canvas = document.querySelector('#barChartFiebre');
+    ctx = canvas.getContext('2d');
+    ctx.canvas.width = $('#graph').width(); // resize to parent width
+    ctx.canvas.height = $('#graph').height(); // resize to parent height
+    var x = canvas.width/2;
+    var y = canvas.height/2;
+    ctx.font = '10pt Verdana';
+    ctx.textAlign = 'center';
+    ctx.fillText('This text is centered on the canvas', x, y); 
+  }; --}}

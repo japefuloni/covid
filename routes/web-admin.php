@@ -22,3 +22,4 @@ Route::post('/perfil/actualizar','Administrador\PerfilController@envioGuardarPer
 
 Route::get('/estadistica','Estadistica\EstadisticaController@index')->name('estadistica');
 Route::get('/estadistica/fiebre/grafico/ajax','Estadistica\EstadisticaController@getDatosGraficaFiebreAjax')->name('estadistica.fiebre.grafico.ajax')->middleware('auth');
+Route::get('/estadistica/secrecion/grafico/ajax','Estadistica\EstadisticaController@getDatosGraficaSecrecionAjax')->name('estadistica.secrecion.grafico.ajax')->middleware('auth');
