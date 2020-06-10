@@ -194,7 +194,7 @@ use App\Entidades\Menus;
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('ciudad.listar') }}" class="nav-link">
+              <a id="menuCiudad" href="{{ route('ciudad.listar') }}" class="nav-link">
                 <i class="nav-icon fas fa-city"></i><p>Ciudades</p>
               </a>
             </li>            
