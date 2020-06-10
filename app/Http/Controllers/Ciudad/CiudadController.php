@@ -12,7 +12,10 @@ use Validator;
 use DB;
 use Log;
 use Exception;
-
+/**
+ * Javier Mantilla. javier.mantillap@upb.edu.co
+ * 2020-06-10
+ */
 class CiudadController extends Controller
 {
     private $administrador;

@@ -21,7 +21,8 @@
 
 
 <div class="col-md-4">
-  <form method="post" id="search-form" name="search-form" data-toggle="validator" class="formulario"         role="form">
+  <form method="post" id="search-form" name="search-form" data-toggle="validator" class="formulario" role="form">
+    {{ csrf_field() }}
   <div class="card card-secondary">
     <div class="card-body">
         <div class="form-group fecha-desde" >
@@ -51,8 +52,7 @@
             <input name="excel" id="excel"  type="checkbox" value="1" class="flat-red pull-right" > Generar Excel
         </div>
     </div>
-    <div class="card-footer">
-        {{-- <button id="btnGenerarExcel" name="btnGenerarExcel" type="button" class="btn btn-success">Generar Excel</button> --}}
+    <div class="card-footer">        
         <button id="btnConsultar" type="submit" class="btn btn-info pull-right">Consultar</button>
     </div>
   </div> 
@@ -238,11 +238,17 @@
         $('.open-fecha-desde').click(function(event){ event.preventDefault(); $('#fecha_desde').focus();});
         $('.open-fecha-hasta').click(function(event){ event.preventDefault(); $('#fecha_hasta').focus();});         
 
-        $('#search-form').on('submit', function(e) {
-               e.preventDefault();                
-               cargarDatosGraficaFiebre(); cargarDatosGraficaSecrecion(); cargarDatosGraficaViaje();
-               cargarDatosGraficaGarganta(); cargarDatosGraficaMalestar(); cargarDatosGraficaRespirar();
-               cargarDatosGraficaTos(); cargarDatosGraficaContacto();
+        $('#search-form').on('submit', function(e) {               
+               if($('input:checkbox[name=excel]:checked').val()!=1){
+                  e.preventDefault();                
+                  cargarDatosGraficaFiebre(); cargarDatosGraficaSecrecion(); cargarDatosGraficaViaje();
+                  cargarDatosGraficaGarganta(); cargarDatosGraficaMalestar(); cargarDatosGraficaRespirar();
+                  cargarDatosGraficaTos(); cargarDatosGraficaContacto();
+               }else{
+                  $('form[name=search-form]').attr('action','{!! route('estadistica.generar.excel'); !!}');
+                  $("#search-form").unbind('submit').submit();  
+               }
+               
         });
         $('#excel').on('ifChecked', function(event){
              $("#btnConsultar").text("Generar Excel");
