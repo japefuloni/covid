@@ -28,7 +28,7 @@ use App\Entidades\Menus;
 <!-- Bootstrap 4 -->
 <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.min.css">-->
 <!-- AdminLTE App -->
 <script src="/plugins/datatables/jquery.dataTables.js"></script>
 <script src="/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
@@ -151,25 +151,30 @@ use App\Entidades\Menus;
         <li class="nav-item"><a id="menuHome"  href="{{ route('home') }}" class="nav-link"><p>Página Inicial</p></a></li>    
         <li class="nav-header">MENU PRINCIPAL</li> 
         <li class="nav-item"><a id="menuEstadistica" href="{{ route('estadistica') }}" class="nav-link"> <i class="nav-icon fas fa-chart-pie"></i><p>Estadisticas</p></a></li>            
-        <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-database"></i>
+        <li id="menuReportes" class="nav-item has-treeview">
+          <a href="#" class="nav-link" >
+            <i class="nav-icon fas fa-file-invoice"></i>
             <p>Reportes<i class="right fas fa-angle-left"></i></p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a id="menuReporte1" href="{{ route('reportes.reporte1') }}" class="nav-link">
-                <i class="far fa-circle text-info nav-icon"></i><p>Críticos x Periodo</p>
+                <i class="nav-icon fas fa-exclamation-triangle"></i><p>Críticos x Periodo</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="./index2.html" class="nav-link">
-                <i class="far fa-circle text-info nav-icon"></i><p>Reporte 2</p>
+              <a id="menuReporte2" href="{{ route('reportes.reporte2') }}" class="nav-link">
+                <i class="nav-icon fas fa-users"></i><p>Todos x Periodo</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="./index3.html" class="nav-link">
-                <i class="far fa-circle text-info nav-icon"></i><p>Reporte 3</p>
+              <a  id="menuReporte3" href="{{ route('reportes.reporte3') }}" class="nav-link">
+                <i class="nav-icon fas fa-diagnoses"></i><p>Trazabilidad de usuario</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a  id="menuReporte4" href="{{ route('reportes.reporte4') }}" class="nav-link">
+                <i class="nav-icon fas fa-bed"></i><p>Usuarios No Reportaron</p>
               </a>
             </li>
           </ul>

@@ -34,6 +34,9 @@ Route::resource('sedes', 'SedesController')->names('sedes')->parameters(['sedes'
 Route::post('revisar', 'RevisarController@verificar')->name('revisar');
 
 Route::get('reportes/reporte1', 'ReportesController@index')->name('reportes.reporte1')->middleware('auth');
+Route::get('reportes/reporte2', 'ReportesController@reporte2')->name('reportes.reporte2')->middleware('auth');
+Route::get('reportes/reporte3', 'ReportesController@reporte3')->name('reportes.reporte3')->middleware('auth');
+Route::get('reportes/reporte4', 'ReportesController@reporte4')->name('reportes.reporte4')->middleware('auth');
 
 
 /* Route::get('losusuarios', function(){
@@ -52,6 +55,9 @@ Route::get('reportes/reporte1', 'ReportesController@index')->name('reportes.repo
 Route::get('losusuarios', 'UsuariosController@getListaUsuarios')->name('losusuarios');
 Route::get('losformularios', 'FormularioController@getListaFormularios')->name('losformularios');
 Route::get('reporteador1', 'ReportesController@getReporte1Formularios')->name('reporteador1');
+Route::get('reporteador2', 'ReportesController@getReporte2Formularios')->name('reporteador2');
+Route::get('reporteador3', 'ReportesController@getReporte3Formularios')->name('reporteador3');
+Route::get('reporteador4', 'ReportesController@getReporte4Formularios')->name('reporteador4');
 
 
 Auth::routes();

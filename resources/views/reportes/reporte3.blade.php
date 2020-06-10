@@ -1,8 +1,8 @@
 @extends('layout')
-@section('title','Reporte Personas Críticas Por Periodo')
+@section('title','Trazabilidad de usuario')
 @section('titulopag','REPORTE')
 @section('elcontrolador','REPORTES')
-@section('laaccion','Personas Críticas (Sospechosas) por Periodo')
+@section('laaccion','Trazabilidad de Usuario Por periodo')
 @section('content')
 @include('partials.session-status')
 
@@ -22,6 +22,12 @@
             Ingrese la Fecha Final del Periodo
             </label>
             <input required size=40 class="form-control col-md-10" type="date" id="fecha_hasta" name="fecha_hasta" value="{{ old('fechahasta') }}"><br>
+          </div>
+          <div class="col-sm">
+            <label id="ld_ultimocontacto">
+            Documento del Usuario
+            </label>
+            <input required size=40 class="form-control col-md-10" type="number" id="documento" name="documento" value="{{ old('documento') }}"><br>
           </div>
           <div class="col-sm">
             <button class="btn btn-info" type="submit">Consultar</button>
@@ -69,17 +75,18 @@
 <script>
   var otable=null;
   $(document).ready(function() {
-      $("#menuReporte1" ).addClass("active" );
+      $("#menuReporte3" ).addClass("active" );
       $("#menuReportes" ).addClass("menu-open" );
       otable=$('#example1').DataTable({
         'paging' : true,'ordering': true,
           "searching": true,"processing": false,"serverSide": true,"info": false,
           "language": { "url": "/bower_components/datatables.net/locale/Spanish.json"},
           "ajax": {
-                  url: '{!! route('reporteador1'); !!}',
+                  url: '{!! route('reporteador3'); !!}',
                   data: function (d) {
                       d.fecha_desde = $('input[name=fecha_desde]').val();
                       d.fecha_hasta = $('input[name=fecha_hasta]').val();
+                      d.documento = $('input[name=documento]').val();
                   }
               },
           "columns": [
@@ -125,14 +132,14 @@
                    {
                     extend: 'excel',
                     exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18 ] //Your Colume value those you want
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,18 ] //Your Colume value those you want
                    }
                  },
                  {
                     extend: 'pdf',
                     orientation: 'landscape',
                     exportOptions: {
-                    columns: [  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18 ] //Your Colume value those you want
+                    columns: [  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,18 ] //Your Colume value those you want
                    }
                  },
                ],

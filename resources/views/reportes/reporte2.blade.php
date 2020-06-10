@@ -1,8 +1,8 @@
 @extends('layout')
-@section('title','Reporte Personas Críticas Por Periodo')
+@section('title','Todos los Formularios Por Periodo')
 @section('titulopag','REPORTE')
 @section('elcontrolador','REPORTES')
-@section('laaccion','Personas Críticas (Sospechosas) por Periodo')
+@section('laaccion','Todos los Formularios por Periodo')
 @section('content')
 @include('partials.session-status')
 
@@ -69,14 +69,14 @@
 <script>
   var otable=null;
   $(document).ready(function() {
-      $("#menuReporte1" ).addClass("active" );
+      $("#menuReporte2" ).addClass("active" );
       $("#menuReportes" ).addClass("menu-open" );
       otable=$('#example1').DataTable({
         'paging' : true,'ordering': true,
           "searching": true,"processing": false,"serverSide": true,"info": false,
           "language": { "url": "/bower_components/datatables.net/locale/Spanish.json"},
           "ajax": {
-                  url: '{!! route('reporteador1'); !!}',
+                  url: '{!! route('reporteador2'); !!}',
                   data: function (d) {
                       d.fecha_desde = $('input[name=fecha_desde]').val();
                       d.fecha_hasta = $('input[name=fecha_hasta]').val();
@@ -125,14 +125,14 @@
                    {
                     extend: 'excel',
                     exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18 ] //Your Colume value those you want
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,18 ] //Your Colume value those you want
                    }
                  },
                  {
                     extend: 'pdf',
                     orientation: 'landscape',
                     exportOptions: {
-                    columns: [  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18 ] //Your Colume value those you want
+                    columns: [  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,18 ] //Your Colume value those you want
                    }
                  },
                ],
