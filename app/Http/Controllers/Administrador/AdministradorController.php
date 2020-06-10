@@ -75,7 +75,7 @@ class AdministradorController extends Controller
         }
         Session::put('idAdministradorModificar',$this->administrador->n_id);
         $accion='Registro';
-        if(request('n_idprueba')!=null ){
+        if(request('n_id')!=null ){
              $accion='Actualizo';
         }
         Session::flash('flash', 'Administrador se '.$accion.' satisfactoriamente  Id:'.$this->administrador->n_id );        

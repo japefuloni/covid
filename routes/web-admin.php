@@ -12,7 +12,6 @@ Route::post('/autenticar','Auth\LoginController@validarLogin')->name('login.vali
 Route::get('/autenticar','Auth\LoginController@irLogin');
 //Route::get('logout','Auth\LoginController@logout')->name('logout');
 
-
 #administradores
 Route::get('/administrador/listar','Administrador\ListarAdministradorController@index')->name('administrador.listar')->middleware('auth');
 Route::post('/administrador/listar','Administrador\ListarAdministradorController@seleccionar')->name('administrador.seleccionar')->middleware('auth');
@@ -21,7 +20,6 @@ Route::get('/administrador/administrador','Administrador\AdministradorController
 Route::post('/administrador/administrador','Administrador\AdministradorController@envioGuardar')->name('administrador.guardar')->middleware('auth');
 Route::get('/perfil','Administrador\PerfilController@showPerfil')->name('administrador.perfil')->middleware('auth');
 Route::post('/perfil/actualizar','Administrador\PerfilController@envioGuardarPerfil')->name('perfil.guardar')->middleware('auth'); 
-
 
 
 Route::get('/estadistica','Estadistica\EstadisticaController@index')->name('estadistica');
@@ -37,3 +35,8 @@ Route::get('/estadistica/contacto/grafico/ajax','Estadistica\EstadisticaControll
 
 #ciudades
 Route::get('/ciudad/listar','Ciudad\ListarCiudadController@index')->name('ciudad.listar')->middleware('auth');
+Route::post('/ciudad/listar','Ciudad\ListarCiudadController@seleccionar')->name('ciudad.seleccionar')->middleware('auth');
+Route::get('/ciudad/listar/nuevo','Ciudad\ListarCiudadController@envioNuevo')->name('ciudad.listar.nuevo')->middleware('auth');
+Route::get('/ciudad/ciudad','Ciudad\CiudadController@index')->name('ciudad.mostrar')->middleware('auth');
+Route::post('/ciudad/ciudad','Ciudad\CiudadController@envioGuardar')->name('ciudad.guardar')->middleware('auth');
+

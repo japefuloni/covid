@@ -29,4 +29,19 @@ class ListarCiudadController extends Controller
         $ciudades=Ciudad::all();        
         return view('ciudad.listarciudad',['ciudades'=>$ciudades]);
     }
+
+     public function seleccionar(){
+        if(request('idCiudadSeleccionada')!=null){
+            Session::put('idCiudadModificar',request('idCiudadSeleccionada'));            
+        }else{
+            Session::forget('idCiudadModificar');            
+        }
+        return redirect()->route('ciudad.mostrar');
+    }
+
+    public function envioNuevo()    {
+        
+        Session::forget('idCiudadModificar');
+        return redirect()->route('ciudad.mostrar');
+    }
 }

@@ -16,7 +16,7 @@
     </div>    
 </div>    
 <div class="table-responsive">
-    <table id="example1" class="table table-bordered table-striped tbl">
+    <table id="listadoCiudad" class="table table-bordered table-striped tbl">
         <thead>
             <tr>
                 <th class="text-center">Sel..</th>
@@ -39,7 +39,7 @@
                     </td>
                     <td>{{ $ciudad->n_id }}</td>
                     <td>{{ $ciudad->t_nombre }}</td>                                                            
-                    <td>{{ $ciudad->dt_updated_at }}</td>
+                    <td>{{ $ciudad->dt_update_at }}</td>
                     <td class="text-center">
                         @if ($ciudad->b_habilitado == 1)
                             <span class="badge badge-success">Activo</span>
@@ -60,10 +60,10 @@
 @section('script-custom')
 <script>
     $(function () {      
-        $("#menuSedes" ).addClass("active" );
+        $("#menuCiudad" ).addClass("active" );
         $("#menuTablas" ).addClass("menu-open" );
       
-      $('#example1').DataTable({
+      $('#listadoCiudad').DataTable({
         "paging": true,
         "lengthChange": false,
         "searching": true,
