@@ -74,6 +74,10 @@ if($formulario->n_semaforo=="3")
   </div>
 </div>
 
+<div class="visible-print text-center">
+  {!! QrCode::size(300)->generate(Request::url()); !!}
+{{-- <p>{{ Request::url() }}</p> --}}
+</div>
 
 <div class="card card-{{$color}}">
   <div class="card-header">

@@ -163,7 +163,6 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
-
         /*
          * Package Service Providers...
          */
@@ -176,6 +175,10 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        /*
+         *Laravel Codigo QR 
+         */
+        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
 
     ],
 
@@ -229,6 +232,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class
 
     ],
 
