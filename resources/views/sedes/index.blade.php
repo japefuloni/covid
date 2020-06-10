@@ -108,7 +108,7 @@
                     <tr role="row" class="odd">
                       
                       <td>{{ $sedeitem->t_sede }}</td>
-                      <td>{{ $sedeitem->ciudad->t_nombre }} </td>
+                      <td>{{ $sedeitem->ciudad->t_nombre ?? '' }} </td>
                       <td>{{ $sedeitem->updated_at }}</td>
                       
                       
@@ -140,6 +140,8 @@
 <script>
     $(function () {      
       $("#menuSedes" ).addClass("active" );
+      $("#menuTablas" ).addClass("menu-open" );
+      
      });
   </script>
 @endsection

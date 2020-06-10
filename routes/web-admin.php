@@ -33,3 +33,7 @@ Route::get('/estadistica/malestar/grafico/ajax','Estadistica\EstadisticaControll
 Route::get('/estadistica/respirar/grafico/ajax','Estadistica\EstadisticaController@getDatosGraficaRepirarAjax')->name('estadistica.respirar.grafico.ajax')->middleware('auth');
 Route::get('/estadistica/tos/grafico/ajax','Estadistica\EstadisticaController@getDatosGraficaTosAjax')->name('estadistica.tos.grafico.ajax')->middleware('auth');
 Route::get('/estadistica/contacto/grafico/ajax','Estadistica\EstadisticaController@getDatosGraficaContactoAjax')->name('estadistica.contacto.grafico.ajax')->middleware('auth');
+
+
+#ciudades
+Route::get('/ciudad/listar','Ciudad\ListarCiudadController@index')->name('ciudad.listar')->middleware('auth');
