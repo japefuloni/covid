@@ -26,6 +26,8 @@ class EstadisticaController extends Controller
 
     public function getDatosGraficaFiebreAjax()
     {
+
+        if(request('fecha_desde')==null || request('fecha_hasta') ){           return response()->json(array());        } 
         $fecha_desde='1900-12-31';
         if(request('fecha_desde')!=null){
             $fecha_desde=request('fecha_desde');
@@ -59,6 +61,8 @@ class EstadisticaController extends Controller
 
     public function getDatosGraficaSecrecionAjax()
     {
+        if(request('fecha_desde')==null || request('fecha_hasta') ){           return response()->json(array());        } 
+
         $fecha_desde='1900-12-31';
         if(request('fecha_desde')!=null){ $fecha_desde=request('fecha_desde'); }
         $fecha_hasta='1900-12-31';
@@ -81,6 +85,8 @@ class EstadisticaController extends Controller
 
     public function getDatosGraficaViajeAjax()
     {
+        if(request('fecha_desde')==null || request('fecha_hasta') ){           return response()->json(array());        } 
+
         $fecha_desde='1900-12-31';
         if(request('fecha_desde')!=null){ $fecha_desde=request('fecha_desde'); }
         $fecha_hasta='1900-12-31';
@@ -103,6 +109,7 @@ class EstadisticaController extends Controller
 
     public function getDatosGraficaGargantaAjax()
     {
+        if(request('fecha_desde')==null || request('fecha_hasta') ){           return response()->json(array());        } 
         $fecha_desde='1900-12-31';
         if(request('fecha_desde')!=null){ $fecha_desde=request('fecha_desde'); }
         $fecha_hasta='1900-12-31';
@@ -125,6 +132,7 @@ class EstadisticaController extends Controller
 
     public function getDatosGraficaMalestarAjax()
     {
+        if(request('fecha_desde')==null || request('fecha_hasta') ){           return response()->json(array());        } 
         $fecha_desde='1900-12-31';
         if(request('fecha_desde')!=null){ $fecha_desde=request('fecha_desde'); }
         $fecha_hasta='1900-12-31';
@@ -147,6 +155,7 @@ class EstadisticaController extends Controller
 
     public function getDatosGraficaRepirarAjax()
     {
+        if(request('fecha_desde')==null || request('fecha_hasta') ){           return response()->json(array());        } 
         $fecha_desde='1900-12-31';
         if(request('fecha_desde')!=null){ $fecha_desde=request('fecha_desde'); }
         $fecha_hasta='1900-12-31';
@@ -169,6 +178,7 @@ class EstadisticaController extends Controller
 
     public function getDatosGraficaTosAjax()
     {
+        if(request('fecha_desde')==null || request('fecha_hasta') ){           return response()->json(array());        } 
         $fecha_desde='1900-12-31';
         if(request('fecha_desde')!=null){ $fecha_desde=request('fecha_desde'); }
         $fecha_hasta='1900-12-31';
@@ -191,6 +201,7 @@ class EstadisticaController extends Controller
 
     public function getDatosGraficaContactoAjax()
     {
+        if(request('fecha_desde')==null || request('fecha_hasta') ){           return response()->json(array());        } 
         $fecha_desde='1900-12-31';
         if(request('fecha_desde')!=null){ $fecha_desde=request('fecha_desde'); }
         $fecha_hasta='1900-12-31';
