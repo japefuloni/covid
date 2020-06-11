@@ -23,7 +23,7 @@
 <div class="col-md-4">
   <form method="post" id="search-form" name="search-form" data-toggle="validator" class="formulario" role="form">
     {{ csrf_field() }}
-  <div class="card card-secondary">
+  <div id="panelFechas" class="card card-secondary">
     <div class="card-body">
         <div class="form-group fecha-desde" >
             <label for="fecha_desde" >Fecha Desde *</label>
@@ -230,13 +230,17 @@
       $("#fecha_hasta").val(today);   
       $("#menuEstadistica" ).addClass("active" );   
       $('#fecha_desde').datepicker({ autoclose: true,format:'yyyy-mm-dd',defaultViewDate:'today',todayHighlight:true,todayBtn:true
-                ,enableOnReadonly:true,language:'es',
+                ,enableOnReadonly:true,language:'es'
+                ,container:'#panelFechas'
         }).on('changeDate', function(e) {});
         $('#fecha_hasta').datepicker({ autoclose: true,format:'yyyy-mm-dd',defaultViewDate:'today',todayHighlight:true,todayBtn:true
                 ,enableOnReadonly:true,language:'es',
         }).on('changeDate', function(e) {});
         $('.open-fecha-desde').click(function(event){ event.preventDefault(); $('#fecha_desde').focus();});
         $('.open-fecha-hasta').click(function(event){ event.preventDefault(); $('#fecha_hasta').focus();});         
+
+        //$("#inmueble_cliente").autocomplete("option", "appendTo", "#modal-detalle");
+        
 
         $('#search-form').on('submit', function(e) {               
                if($('input:checkbox[name=excel]:checked').val()!=1){
