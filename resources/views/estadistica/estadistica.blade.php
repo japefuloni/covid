@@ -471,8 +471,9 @@
         barChartData.datasets[1] = temp0;
         var barChartOptions = {
           responsive              : true,maintainAspectRatio     : false, datasetFill             : false,
-          scales: {yAxes: [{ ticks: {beginAtZero: true,stepSize: 1,}}]}
+          scales: {yAxes: [{ ticks: {beginAtZero: true,min: 0,}}]}
         };
+        /* scales: {yAxes: [{ ticks: {beginAtZero: true,stepSize: 20,}}]} */
         if(nombreGrafica=="#barChartFiebre"){  barChartFiebre = new Chart(barChartCanvas, { type: 'bar', data: barChartData,options: barChartOptions }); }
         if(nombreGrafica=="#barChartSecrecion"){  barChartSecrecion = new Chart(barChartCanvas, { type: 'bar', data: barChartData,options: barChartOptions }); }
         if(nombreGrafica=="#barChartViaje"){  barChartViaje = new Chart(barChartCanvas, { type: 'bar', data: barChartData,options: barChartOptions }); }
